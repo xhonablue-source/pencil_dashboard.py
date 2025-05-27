@@ -2,19 +2,39 @@ import streamlit as st
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches  # Add this line!
+import matplotlib.patches as mpatches  # Fixed import!
 import numpy as np
 import pandas as pd
 
 # Page configuration
 st.set_page_config(
-    page_title="4th Grade Math: Dimensional Thinking with a Pencil", 
+    page_title="4th Grade Math: Area and Measurement with a Pencil", 
     layout="centered"
 )
 
 # Header
 st.markdown("#### Honablue M.Ed International")
-st.title("📝 4th Grade Math: Dimensional Thinking with a Pencil")
+st.title("📐 4th Grade Math: Area and Measurement with a Pencil")
+
+# Michigan Learning Standards
+st.markdown("---")
+st.markdown("### 📚 Michigan Learning Standards Addressed")
+with st.expander("Click to view aligned standards"):
+    st.markdown("""
+    **4.MD.1** - Know relative sizes of measurement units within one system of units including km, m, cm; kg, g; lb, oz.; l, ml; hr, min, sec. Within a single system of measurement, express measurements in a larger unit in terms of a smaller unit.
+    
+    **4.MD.2** - Use the four operations to solve word problems involving distances, intervals of time, liquid volumes, masses of objects, and money, including problems involving simple fractions or decimals.
+    
+    **4.MD.3** - Apply the area and perimeter formulas for rectangles in real world and mathematical problems.
+    
+    **4.OA.3** - Solve multistep word problems posed with whole numbers and having whole-number answers using the four operations, including problems in which remainders must be interpreted.
+    
+    **Mathematical Practices:**
+    - **MP.1** - Make sense of problems and persevere in solving them
+    - **MP.5** - Use appropriate tools strategically  
+    - **MP.6** - Attend to precision
+    """)
+st.markdown("---")
 
 # Initialize session state
 if "responses" not in st.session_state:
@@ -38,9 +58,9 @@ st.session_state.responses.update({"Name": name, "Date": date})
 st.markdown("---")
 st.markdown("""
 ### 🧠 Learning Objective
-Use estimation, drawing, and measurement to explore **dimensions, area, and circumference** with a pencil and yellow tape.
+Use estimation, measurement tools, and mathematical reasoning to explore **area, perimeter, and measurement conversions** with a pencil and yellow tape.
 
-*In 1st grade, students described a pencil by its length and weight. Some said 'yellow' — today, we explore what that really means in mathematical terms.*
+*Students will apply measurement skills and area concepts while practicing estimation strategies and using both standard and non-standard units of measure.*
 """)
 
 # Step 1: Estimation
@@ -180,13 +200,27 @@ st.markdown("### 📦 Step 5: Understanding Area")
 st.markdown("""
 If you could unwrap all the tape from your pencil and lay it flat, you'd get a rectangle!
 - **Length** = length of your pencil
-- **Width** = how many strips went around
-- **Area** = Length × Width
+- **Width** = width of one tape strip
+- **Number of strips** = how many strips went around (from cross section)
+- **Total Area** = Length × Width × Number of strips around
 """)
 
-if actual_strips > 0 and inches > 0:
-    area_estimate = actual_strips * inches
-    st.metric("Estimated Tape Area", f"{area_estimate:.1f} square inches")
+if actual_strips > 0 and inches > 0 and circumference_estimate > 0:
+    # Assuming each tape strip is about 0.5 inches wide (standard tape width)
+    tape_width = 0.5
+    total_surface_area = inches * tape_width * circumference_estimate
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Tape Strip Width", f"{tape_width} inches", help="Standard tape width assumption")
+    with col2:
+        st.metric("Total Surface Area", f"{total_surface_area:.1f} square inches")
+    
+    st.markdown(f"""
+    **Calculation:** {inches:.1f} inches (length) × {tape_width} inches (tape width) × {circumference_estimate} strips (around) = **{total_surface_area:.1f} square inches**
+    """)
+elif inches > 0:
+    st.info("Complete all measurements above to see the full area calculation!")
 
 # Reflection Questions
 st.markdown("---")
