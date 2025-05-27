@@ -1,6 +1,6 @@
 streamlit==1.28.0
 matplotlib==3.7.2
-numpy==1.24.5
+numpy==1.23.5
 pandas==2.0.3
 plotly==5.15.0
 setuptools  # 👈 this provides 'distutils'
