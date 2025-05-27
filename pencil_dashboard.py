@@ -291,7 +291,9 @@ st.session_state.responses.update({
     "Reflection_3": reflection3
 })
 
-# Submit Section
+# Submit
+st.markdown("---")
+st.markdown("### ✅ Submit Your Complete Work") Section
 st.markdown("---")
 if st.button("✅ Submit My Work", type="primary"):
     if name and date:
