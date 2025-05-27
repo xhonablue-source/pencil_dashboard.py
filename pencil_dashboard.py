@@ -687,8 +687,12 @@ if st.button("✅ Submit My Work", type="primary"):
     else:
         st.error("Please fill in your name and date before submitting!")
 
-# Teacher's Data View
-if st.checkbox("🏫 Teacher View: Show All Student Data"):
+# Teacher's Data View - Password Protected
+st.markdown("---")
+teacher_password = st.text_input("🏫 Teacher Access Code:", type="password", key="teacher_pass")
+
+if teacher_password == "mathcraft2025":  # You can change this password
+    st.markdown("### 📊 Teacher Dashboard")
     if st.session_state.all_responses:
         df = pd.DataFrame(st.session_state.all_responses)
         st.dataframe(df, use_container_width=True)
@@ -705,8 +709,20 @@ if st.checkbox("🏫 Teacher View: Show All Student Data"):
             with col3:
                 completion_rate = (df['Name'].notna().sum() / len(df)) * 100
                 st.metric("Completion Rate", f"{completion_rate:.0f}%")
+                
+        # Download option for teacher
+        if len(df) > 0:
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="📥 Download Student Data as CSV",
+                data=csv,
+                file_name="student_responses.csv",
+                mime="text/csv"
+            )
     else:
-        st.info("No student responses yet.")
+        st.info("No student responses recorded in this session.")
+elif teacher_password and teacher_password != "mathcraft2025":
+    st.error("❌ Incorrect access code")
 
 # Footer
 st.markdown("---")
