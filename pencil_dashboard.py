@@ -72,22 +72,82 @@ Use estimation, measurement tools, and mathematical reasoning to explore **area 
 - 📏 **Ruler** (with both inches and centimeters)
 """)
 
-# Interactive Fraction Tutorial
+# Area Formula Introduction
 st.markdown("---")
-st.markdown("### 📏 Understanding Sixteenths of an Inch")
-st.markdown("Let's learn how fractions work on a ruler!")
+st.markdown("### 🌟 **KEY FORMULA FOR THIS LESSON**")
+st.markdown("""
+<div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; margin: 1rem 0;">
+    <h3 style="color: white; margin: 0; font-size: 1.5rem;">Surface Area Formula</h3>
+    <h2 style="color: white; margin: 0.5rem 0; font-family: monospace; font-size: 2rem;">Area = Length × Width × Strips</h2>
+    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Length of pencil × Width of tape × Number of strips around</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Plan view of tape strip with dimensions
+st.markdown("### 📋 Meet Your BIC Wite-Out EZ Correct Strip")
+st.markdown("**This is what ONE strip of your correction tape looks like from above (Plan View):**")
+
+fig_tape, ax_tape = plt.subplots(figsize=(10, 4))
+
+tape_length = 6.5
+tape_width = 3/16
+scale_factor = 15  # Make it bigger for visibility
+
+rect = plt.Rectangle((0, 0), tape_length, tape_width * scale_factor, 
+                    facecolor='white', edgecolor='black', linewidth=3)
+ax_tape.add_patch(rect)
+
+# Add dimensions with better arrows
+ax_tape.annotate('', xy=(0, -0.4), xytext=(tape_length, -0.4),
+                arrowprops=dict(arrowstyle='<->', color='blue', lw=3))
+ax_tape.text(tape_length/2, -0.7, f'{tape_length}" long', 
+            ha='center', va='top', fontsize=14, color='blue', fontweight='bold')
+
+ax_tape.annotate('', xy=(-0.5, 0), xytext=(-0.5, tape_width * scale_factor),
+                arrowprops=dict(arrowstyle='<->', color='red', lw=3))
+ax_tape.text(-0.8, (tape_width * scale_factor)/2, f'3/16" wide', 
+            ha='center', va='center', fontsize=12, color='red', fontweight='bold', rotation=90)
+
+# Add area calculation
+ax_tape.text(tape_length/2, (tape_width * scale_factor)/2, 
+            f'Area = {tape_length}" × 3/16" = {tape_length * (3/16):.4f} square inches', 
+            ha='center', va='center', fontsize=12, fontweight='bold', 
+            bbox=dict(boxstyle="round,pad=0.3", facecolor="yellow", alpha=0.8))
+
+ax_tape.set_xlim(-1.2, tape_length + 0.5)
+ax_tape.set_ylim(-1, tape_width * scale_factor + 0.5)
+ax_tape.set_aspect('equal')
+ax_tape.set_title('📋 Plan View: ONE BIC Wite-Out EZ Correct Strip\n(Actual dimensions)', 
+                 fontsize=16, fontweight='bold', pad=20)
+ax_tape.axis('off')
+
+st.pyplot(fig_tape)
+
+st.markdown("""
+**Why these measurements matter:**
+- **Length: 6.5 inches** - This is how long each strip is when you pull it from the dispenser
+- **Width: 3/16 inch** - This is how wide the tape is (we'll learn about this fraction below!)
+- **Area of ONE strip: 1.2188 square inches** - This is the area each strip covers
+
+📐 **Plan View** means looking down from directly above, showing length and width. Later we'll see a **cross-section** view!
+""")
+
+# Interactive Fraction Tutorial - NOW CONNECTED TO TAPE WIDTH
+st.markdown("---")
+st.markdown("### 📏 Understanding 3/16 Inch (Your Tape Width!)")
+st.markdown("**Your BIC Wite-Out tape is 3/16 inch wide. Let's understand what that means!**")
 
 # Create ruler showing sixteenths
 fig_ruler, ax_ruler = plt.subplots(figsize=(10, 4))
-ruler_length = 2
+ruler_length = 1  # Show just 1 inch for clarity
 ax_ruler.add_patch(plt.Rectangle((0, 0), ruler_length, 0.5, facecolor='lightgray', edgecolor='black'))
 
 # Add inch marks
-for i in range(3):
+for i in range(2):
     ax_ruler.plot([i, i], [0, 0.5], 'k-', linewidth=3)
     ax_ruler.text(i, -0.1, f'{i}"', ha='center', va='top', fontweight='bold', fontsize=12)
 
-# Add sixteenth marks
+# Add sixteenth marks with special highlighting for 3/16
 for i in range(ruler_length * 16 + 1):
     x = i / 16
     if i % 16 == 0:
@@ -101,21 +161,30 @@ for i in range(ruler_length * 16 + 1):
     else:
         ax_ruler.plot([x, x], [0, 0.15], 'k-', linewidth=0.5)
 
-ax_ruler.set_xlim(-0.1, 2.1)
-ax_ruler.set_ylim(-0.3, 0.8)
-ax_ruler.set_title('Ruler Showing Sixteenths of an Inch', fontsize=14, fontweight='bold')
+# Highlight 3/16 specifically
+tape_width_pos = 3/16
+ax_ruler.plot([tape_width_pos, tape_width_pos], [0, 0.5], 'r-', linewidth=4)
+ax_ruler.text(tape_width_pos, 0.7, '3/16"\n(Your tape width!)', ha='center', va='bottom', 
+             fontweight='bold', color='red', fontsize=12,
+             bbox=dict(boxstyle="round,pad=0.3", facecolor="yellow", alpha=0.8))
+
+ax_ruler.set_xlim(-0.1, 1.1)
+ax_ruler.set_ylim(-0.3, 1.0)
+ax_ruler.set_title('Ruler Showing Your Tape Width: 3/16 Inch', fontsize=14, fontweight='bold')
 ax_ruler.axis('off')
 st.pyplot(fig_ruler)
 
-# Interactive fraction calculator
-st.markdown("#### 🧮 Sixteenths Calculator")
+# Interactive fraction calculator - focused on understanding 3/16
+st.markdown("#### 🧮 Fraction Calculator: Explore Different Sixteenths")
+st.markdown("**Try different fractions to see how 3/16 compares to other measurements:**")
+
 col1, col2 = st.columns(2)
 
 with col1:
     numerator = st.selectbox(
         "Choose the numerator (top number):",
         options=list(range(1, 17)),
-        index=2,
+        index=2,  # Default to 3 for 3/16
         key="fraction_num"
     )
 
@@ -126,7 +195,13 @@ with col2:
 decimal_result = numerator / 16
 st.markdown(f"**Decimal equivalent:** {numerator}/16 = {decimal_result:.4f} inches")
 
-# Visual representation of the fraction
+# Special callout when 3/16 is selected
+if numerator == 3:
+    st.success(f"🎯 **Perfect! This is your tape width: 3/16 = {decimal_result:.4f} inches**")
+else:
+    st.info(f"Compare this to your tape width: 3/16 = {3/16:.4f} inches")
+
+# Visual representation focused on the selected fraction
 fig_frac, (ax_whole, ax_zoom) = plt.subplots(1, 2, figsize=(12, 3))
 
 # Show whole inch divided into 16 parts
@@ -141,8 +216,16 @@ for i in range(numerator):
     x2 = (i + 1) / 16
     ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.5, facecolor='red', alpha=0.7))
 
+# Always show where 3/16 is for comparison
+if numerator != 3:
+    for i in range(3):
+        x1 = i / 16
+        x2 = (i + 1) / 16
+        ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.5, facecolor='yellow', alpha=0.5))
+    ax_whole.text(3/32, 0.6, 'Tape width\n(3/16)', ha='center', va='bottom', fontsize=8, color='orange')
+
 ax_whole.set_xlim(-0.05, 1.05)
-ax_whole.set_ylim(-0.1, 0.7)
+ax_whole.set_ylim(-0.1, 0.8)
 ax_whole.set_title(f'One Inch Showing {numerator}/16', fontweight='bold')
 ax_whole.text(0.5, -0.05, '1 inch = 16/16', ha='center', va='top', fontsize=10)
 ax_whole.axis('off')
@@ -159,50 +242,30 @@ for i in range(int(zoom_start * 16), int(zoom_end * 16) + 1):
         if i == numerator:
             ax_zoom.plot([x, x], [0, 0.5], 'r-', linewidth=3)
             ax_zoom.text(x, 0.6, f'{i}/16', ha='center', va='bottom', fontweight='bold', color='red')
+        elif i == 3:  # Always mark the tape width
+            ax_zoom.plot([x, x], [0, 0.5], 'orange', linewidth=2)
+            ax_zoom.text(x, -0.1, 'Tape', ha='center', va='top', fontsize=8, color='orange')
 
 ax_zoom.set_xlim(zoom_start - 0.02, zoom_end + 0.02)
-ax_zoom.set_ylim(-0.1, 0.8)
+ax_zoom.set_ylim(-0.2, 0.8)
 ax_zoom.set_title(f'Zoomed View: {numerator}/16 = {decimal_result:.4f}"', fontweight='bold')
 ax_zoom.axis('off')
 
 st.pyplot(fig_frac)
 
-# Plan view of tape strip
-st.markdown("#### 📋 Plan View: One Strip of Correction Tape")
-fig_tape, ax_tape = plt.subplots(figsize=(8, 3))
+st.markdown("---")
+st.markdown("""
+### 🔗 **Connecting Fractions to Area Calculation**
 
-tape_length = 6.5
-tape_width = 3/16
-scale_factor = 10
+Now you understand that your BIC Wite-Out tape is **3/16 inch wide = 0.1875 inches**!
 
-rect = plt.Rectangle((0, 0), tape_length, tape_width * scale_factor, 
-                    facecolor='white', edgecolor='black', linewidth=2)
-ax_tape.add_patch(rect)
+When we calculate the surface area of your pencil, we'll use:
+- **Length**: How long your pencil is (you'll measure this)
+- **Width**: 3/16 inch (0.1875 inches) - the width of your tape
+- **Number of strips**: How many strips go around the pencil
 
-# Add dimensions
-ax_tape.annotate('', xy=(0, -0.3), xytext=(tape_length, -0.3),
-                arrowprops=dict(arrowstyle='<->', color='blue', lw=2))
-ax_tape.text(tape_length/2, -0.5, f'{tape_length}" long', 
-            ha='center', va='top', fontsize=12, color='blue', fontweight='bold')
-
-ax_tape.annotate('', xy=(-0.3, 0), xytext=(-0.3, tape_width * scale_factor),
-                arrowprops=dict(arrowstyle='<->', color='red', lw=2))
-ax_tape.text(-0.6, (tape_width * scale_factor)/2, f'3/16" wide\n(0.1875")', 
-            ha='center', va='center', fontsize=10, color='red', fontweight='bold', rotation=90)
-
-ax_tape.set_xlim(-1, tape_length + 0.5)
-ax_tape.set_ylim(-0.8, tape_width * scale_factor + 0.5)
-ax_tape.set_aspect('equal')
-ax_tape.set_title('📋 Plan View: One Strip of Correction Tape\n(Top-down view)', 
-                 fontsize=14, fontweight='bold', pad=20)
-ax_tape.axis('off')
-
-st.pyplot(fig_tape)
-
-st.markdown("**Plan View**: This shows what the tape strip looks like when viewed from directly above.")
-st.markdown("**Key measurements:**")
-st.markdown("- Length: 6.5 inches")
-st.markdown("- Width: 3/16 inch = 0.1875 inches")
+**Area = Length × 0.1875 × Number of strips around**
+""")
 
 # Step 1: Estimation
 st.markdown("---")
