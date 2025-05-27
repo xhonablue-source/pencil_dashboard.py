@@ -194,7 +194,18 @@ This helps us understand how close your guess was. Smaller ratios mean better ac
 
 if actual_strips > 0:
     error_ratio = round(difference / actual_strips, 2)
+    percent_error = round((difference / actual_strips) * 100, 1)
+    percent_accuracy = round(100 - percent_error, 1)
+    over_under = "above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exact")
+    
     st.markdown(f"**Your Error Ratio:** `{difference} / {actual_strips}` = **{error_ratio}**")
+    st.markdown(f"**Percent Error:** {percent_error}%")
+    st.markdown(f"**Percent Accuracy:** {percent_accuracy}%")
+    
+    if over_under != "exact":
+        st.markdown(f"You estimated **{over_under}** the actual amount.")
+    else:
+        st.markdown("You estimated the exact amount! Great precision!")
     
     # Interpret the error ratio
     if error_ratio == 0:
@@ -206,7 +217,12 @@ if actual_strips > 0:
     else:
         st.warning("📈 Room for improvement! Keep practicing estimation!")
     
-    st.session_state.responses["Error_Ratio"] = error_ratio
+    st.session_state.responses.update({
+        "Error_Ratio": error_ratio,
+        "Percent_Error": percent_error,
+        "Percent_Accuracy": percent_accuracy,
+        "Over_Under": over_under
+    })
 
 # Step 3: Ruler Measurements
 st.markdown("---")
