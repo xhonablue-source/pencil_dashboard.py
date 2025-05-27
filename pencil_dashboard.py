@@ -126,13 +126,22 @@ ax4.set_title(f"{circumference} strips around pencil")
 st.pyplot(fig3)
 st.session_state.responses["Circumference_Estimate"] = circumference
 
-# Step 5: Area
+# Step 5: Area Calculator
 st.markdown("---")
-st.markdown("### 🛆 Step 5: Calculate Surface Area")
-if inches > 0 and tape_width > 0 and circumference > 0:
-    area = inches * tape_width * circumference
-    st.success(f"Total Surface Area: {area:.2f} square inches")
-    st.session_state.responses.update({"Calculated_Area": area})
+st.markdown("### 🛆 Step 5: Understanding Area")
+col1, col2, col3 = st.columns(3)
+with col1:
+    calc_length = st.number_input("Length (inches):", min_value=0.0, step=0.1, value=inches, format="%.1f")
+with col2:
+    calc_width = st.number_input("Correction tape width (inches):", min_value=0.0, step=0.05, value=tape_width, format="%.2f")
+with col3:
+    calc_strips = st.number_input("Number of strips around:", min_value=1, max_value=12, value=circumference)
+if calc_length > 0 and calc_width > 0 and calc_strips > 0:
+    total_area = calc_length * calc_width * calc_strips
+    st.success(f"🌟 Total Surface Area: {total_area:.2f} square inches")
+    st.session_state.responses.update({"Calculated_Area": total_area, "Calc_Length": calc_length, "Calc_Width": calc_width, "Calc_Strips": calc_strips})
+else:
+    st.info("Enter all measurements above to calculate the area!")
 
 # Analytical Thinking
 st.markdown("---")
