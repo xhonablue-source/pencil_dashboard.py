@@ -8,7 +8,7 @@ import pandas as pd
 
 # Page configuration
 st.set_page_config(
-    page_title="MathCraft Academy | 4th Grade Area & Measurement", 
+    page_title="MathCraft | 4th Grade Area & Measurement", 
     layout="centered",
     page_icon="🧮"
 )
@@ -16,8 +16,9 @@ st.set_page_config(
 # Header with logo-style branding
 st.markdown("""
 <div style="text-align: center; padding: 1rem; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 2rem;">
-    <h2 style="color: white; margin: 0; font-weight: bold;">🧮 MathCraft Academy</h2>
-    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Where Mathematics Meets Innovation</p>
+    <h2 style="color: white; margin: 0; font-weight: bold;">🧮 MathCraft</h2>
+    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Hands-On Mathematical Thinking</p>
+    <p style="color: #e0e0e0; margin: 0; font-size: 0.8rem; margin-top: 0.5rem;">© All Rights Reserved - Xavier Honablue M.Ed</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -65,15 +66,23 @@ st.session_state.responses.update({"Name": name, "Date": date})
 st.markdown("---")
 st.markdown("""
 ### 🧠 Learning Objective
-Use estimation, measurement tools, and mathematical reasoning to explore **area, perimeter, and measurement conversions** with a pencil and yellow tape.
+Use estimation, measurement tools, and mathematical reasoning to explore **area, perimeter, and measurement conversions** with a pencil and white correction tape.
 
 *Students will apply measurement skills and area concepts while practicing estimation strategies and using both standard and non-standard units of measure.*
+
+### 📦 Materials Needed
+Before we begin, make sure you have these items:
+- 📝 **Wood pencil** (standard #2 pencil)
+- ⚪ **BIC Wite-Out EZ Correct** correction tape dispenser
+- 📏 **Ruler** (with both inches and centimeters)
+
+*Teacher note: Each student or pair of students will need their own set of materials.*
 """)
 
 # Step 1: Estimation
 st.markdown("---")
 st.markdown("### 📏 Step 1: Make Your Estimate")
-st.markdown("Look at your pencil. How many strips of yellow tape do you think it will take to cover the entire length?")
+st.markdown("Look at your pencil. How many strips of white correction tape do you think it will take to cover the entire length?")
 
 estimation = st.slider(
     "My Estimate (number of strips):", 
@@ -102,7 +111,7 @@ st.session_state.responses["Estimate"] = estimation
 # Step 2: Actual Measurement
 st.markdown("---")
 st.markdown("### 📐 Step 2: Measure with Real Tape")
-st.markdown("Now use yellow tape to actually measure your pencil. Count how many strips it takes!")
+st.markdown("Now use white correction tape to actually measure your pencil. Count how many strips it takes!")
 
 actual_strips = st.number_input(
     "Actual number of strips used:", 
@@ -168,7 +177,7 @@ st.markdown("### ⭕ Step 4: Explore the Pencil's Cross Section")
 st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. How many tape pieces would it take to go around?")
 
 circumference_estimate = st.slider(
-    "Estimate: tape pieces around the circumference:",
+    "Estimate: white tape pieces around the circumference:",
     min_value=1,
     max_value=8,
     value=6
@@ -187,7 +196,7 @@ for i in range(circumference_estimate):
     
     wedge = mpatches.Wedge(
         (0, 0), 1.2, theta1, theta2, 
-        width=0.15, facecolor="gold", 
+        width=0.15, facecolor="white", 
         edgecolor='black', alpha=0.8
     )
     ax4.add_patch(wedge)
@@ -195,7 +204,7 @@ for i in range(circumference_estimate):
 ax4.set_xlim(-1.5, 1.5)
 ax4.set_ylim(-1.5, 1.5)
 ax4.set_aspect('equal')
-ax4.set_title(f"Pencil Cross Section - {circumference_estimate} tape pieces around edge")
+ax4.set_title(f"Pencil Cross Section - {circumference_estimate} white tape pieces around edge")
 ax4.axis('off')
 st.pyplot(fig3)
 
@@ -205,7 +214,7 @@ st.session_state.responses["Circumference_Estimate"] = circumference_estimate
 st.markdown("---")
 st.markdown("### 📦 Step 5: Understanding Area")
 st.markdown("""
-If you could unwrap all the tape from your pencil and lay it flat, you'd get a rectangle!
+If you could unwrap all the correction tape from your pencil and lay it flat, you'd get a rectangle!
 - **Length** = length of your pencil
 - **Width** = width of one tape strip
 - **Number of strips** = how many strips went around (from cross section)
@@ -228,13 +237,13 @@ with col1:
     )
 with col2:
     calc_width = st.number_input(
-        "Tape width (inches):", 
+        "Correction tape width (inches):", 
         min_value=0.0, 
         step=0.1, 
-        value=0.5,
+        value=0.2,
         format="%.1f",
         key="calc_width",
-        help="Standard tape is about 0.5 inches wide"
+        help="White-out correction tape is typically about 0.2 inches wide"
     )
 with col3:
     calc_strips = st.number_input(
