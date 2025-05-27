@@ -253,18 +253,22 @@ ax_zoom.axis('off')
 
 st.pyplot(fig_frac)
 
-st.markdown("---")
 st.markdown("""
 ### 🔗 **Connecting Fractions to Area Calculation**
 
-Now you understand that your BIC Wite-Out tape is **3/16 inch wide = 0.1875 inches**!
+Now you understand that your BIC Wite-Out **strip** is **3/16 inch wide**!
+
+Each strip has TWO measurements:
+- **Length of the strip**: 6.5 inches (how long it is)
+- **Width of the strip**: 3/16 inch (how wide it is)
 
 When we calculate the surface area of your pencil, we'll use:
 - **Length**: How long your pencil is (you'll measure this)
-- **Width**: 3/16 inch (0.1875 inches) - the width of your tape
+- **Strip width**: 3/16 inch (0.1875 inches) - how wide each strip is
 - **Number of strips**: How many strips go around the pencil
 
-**Area = Length × 0.1875 × Number of strips around**
+**Area = Pencil length × Strip width × Number of strips around**
+**Area = Pencil length × 0.1875 × Number of strips around**
 """)
 
 # Step 1: Estimation
