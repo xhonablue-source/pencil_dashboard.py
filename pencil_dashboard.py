@@ -205,22 +205,61 @@ If you could unwrap all the tape from your pencil and lay it flat, you'd get a r
 - **Total Area** = Length × Width × Number of strips around
 """)
 
-if actual_strips > 0 and inches > 0 and circumference_estimate > 0:
-    # Assuming each tape strip is about 0.5 inches wide (standard tape width)
-    tape_width = 0.5
-    total_surface_area = inches * tape_width * circumference_estimate
+# Area Calculator Section
+st.markdown("#### 🧮 Area Calculator")
+st.markdown("Enter your measurements to calculate the total surface area:")
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    calc_length = st.number_input(
+        "Length (inches):", 
+        min_value=0.0, 
+        step=0.1, 
+        value=float(inches) if inches > 0 else 0.0,
+        format="%.1f",
+        key="calc_length"
+    )
+with col2:
+    calc_width = st.number_input(
+        "Tape width (inches):", 
+        min_value=0.0, 
+        step=0.1, 
+        value=0.5,
+        format="%.1f",
+        key="calc_width",
+        help="Standard tape is about 0.5 inches wide"
+    )
+with col3:
+    calc_strips = st.number_input(
+        "Number of strips around:", 
+        min_value=1, 
+        max_value=12, 
+        value=circumference_estimate if circumference_estimate > 0 else 1,
+        key="calc_strips"
+    )
+
+# Calculate and display result
+if calc_length > 0 and calc_width > 0 and calc_strips > 0:
+    total_area = calc_length * calc_width * calc_strips
     
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Tape Strip Width", f"{tape_width} inches", help="Standard tape width assumption")
-    with col2:
-        st.metric("Total Surface Area", f"{total_surface_area:.1f} square inches")
-    
+    # Display calculation
+    st.markdown("#### 📊 Your Calculation:")
     st.markdown(f"""
-    **Calculation:** {inches:.1f} inches (length) × {tape_width} inches (tape width) × {circumference_estimate} strips (around) = **{total_surface_area:.1f} square inches**
+    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.2f} square inches**
     """)
-elif inches > 0:
-    st.info("Complete all measurements above to see the full area calculation!")
+    
+    # Show result prominently
+    st.success(f"🎯 Total Surface Area: **{total_area:.2f} square inches**")
+    
+    # Save to responses
+    st.session_state.responses.update({
+        "Calculated_Area": total_area,
+        "Calc_Length": calc_length,
+        "Calc_Width": calc_width,
+        "Calc_Strips": calc_strips
+    })
+else:
+    st.info("Enter all measurements above to calculate the area!")
 
 # Reflection Questions
 st.markdown("---")
