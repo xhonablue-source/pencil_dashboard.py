@@ -172,15 +172,15 @@ fig3, ax4 = plt.subplots(figsize=(6, 6))
 circle = plt.Circle((0, 0), 1, color='#DEB887', alpha=0.7)
 ax4.add_patch(circle)
 
-# Add segments around the circle
-for i in range(8):
-    theta1 = i * 45
-    theta2 = (i + 1) * 45
-    color = "gold" if i < circumference_estimate else "lightgray"
+# Add segments around the circle - divide into circumference_estimate sections
+degrees_per_section = 360 / circumference_estimate
+for i in range(circumference_estimate):
+    theta1 = i * degrees_per_section
+    theta2 = (i + 1) * degrees_per_section
     
     wedge = mpatches.Wedge(
         (0, 0), 1.2, theta1, theta2, 
-        width=0.15, facecolor=color, 
+        width=0.15, facecolor="gold", 
         edgecolor='black', alpha=0.8
     )
     ax4.add_patch(wedge)
