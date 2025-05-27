@@ -220,7 +220,7 @@ showing its length and width.
 
 **Key measurements:**
 - Length: 6.5 inches
-- Width: 3/16 inch = {3/16:.4f} inches (as shown in the calculator above)
+- Width: 3/16 inch = 0.1875 inches (as shown in the calculator above)
 
 Later, we'll see the **cross-section** view of the pencil when we look at it from the side after cutting through it.
 """)
