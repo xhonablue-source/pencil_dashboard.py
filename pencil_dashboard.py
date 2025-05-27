@@ -214,7 +214,7 @@ ax_tape.axis('off')
 
 st.pyplot(fig_tape)
 
-st.markdown(f"""
+st.markdown("""
 **Plan View** (also called "top view"): This shows what the tape strip looks like when viewed from directly above, 
 showing its length and width. 
 
