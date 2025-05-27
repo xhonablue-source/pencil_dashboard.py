@@ -77,6 +77,153 @@ Before we begin, make sure you have these items:
 - 📏 **Ruler** (with both inches and centimeters)
 
 *Teacher note: Each student or pair of students will need their own set of materials.*
+
+### 📋 Understanding Your Tape Strip
+Before we start measuring, let's see what one strip of correction tape looks like:
+
+# Interactive Fraction Tutorial
+st.markdown("#### 📏 Understanding Sixteenths of an Inch")
+st.markdown("Let's learn how fractions work on a ruler!")
+
+# Create ruler showing sixteenths
+fig_ruler, ax_ruler = plt.subplots(figsize=(10, 4))
+
+# Draw ruler base
+ruler_length = 2  # 2 inches
+ax_ruler.add_patch(plt.Rectangle((0, 0), ruler_length, 0.5, facecolor='lightgray', edgecolor='black'))
+
+# Add inch marks
+for i in range(3):
+    ax_ruler.plot([i, i], [0, 0.5], 'k-', linewidth=3)
+    ax_ruler.text(i, -0.1, f'{i}"', ha='center', va='top', fontweight='bold', fontsize=12)
+
+# Add sixteenth marks
+for i in range(ruler_length * 16 + 1):
+    x = i / 16
+    if i % 16 == 0:  # Inch marks (already drawn)
+        continue
+    elif i % 8 == 0:  # Half inch
+        ax_ruler.plot([x, x], [0, 0.4], 'k-', linewidth=2)
+    elif i % 4 == 0:  # Quarter inch
+        ax_ruler.plot([x, x], [0, 0.35], 'k-', linewidth=1.5)
+    elif i % 2 == 0:  # Eighth inch
+        ax_ruler.plot([x, x], [0, 0.25], 'k-', linewidth=1)
+    else:  # Sixteenth inch
+        ax_ruler.plot([x, x], [0, 0.15], 'k-', linewidth=0.5)
+
+ax_ruler.set_xlim(-0.1, 2.1)
+ax_ruler.set_ylim(-0.3, 0.8)
+ax_ruler.set_title('Ruler Showing Sixteenths of an Inch', fontsize=14, fontweight='bold')
+ax_ruler.axis('off')
+st.pyplot(fig_ruler)
+
+# Interactive fraction calculator
+st.markdown("#### 🧮 Sixteenths Calculator")
+col1, col2 = st.columns(2)
+
+with col1:
+    numerator = st.selectbox(
+        "Choose the numerator (top number):",
+        options=list(range(1, 17)),
+        index=2,  # Default to 3
+        key="fraction_num"
+    )
+
+with col2:
+    st.markdown("**Denominator (bottom number):** 16")
+    st.markdown(f"**Your fraction:** {numerator}/16")
+
+# Calculate decimal and show result
+decimal_result = numerator / 16
+st.markdown(f"**Decimal equivalent:** {numerator}/16 = {decimal_result:.4f} inches")
+
+# Visual representation of the fraction
+fig_frac, (ax_whole, ax_zoom) = plt.subplots(1, 2, figsize=(12, 3))
+
+# Show whole inch divided into 16 parts
+ax_whole.add_patch(plt.Rectangle((0, 0), 1, 0.5, facecolor='lightblue', edgecolor='black'))
+for i in range(17):
+    x = i / 16
+    ax_whole.plot([x, x], [0, 0.5], 'k-', linewidth=0.5)
+
+# Highlight the selected fraction
+for i in range(numerator):
+    x1 = i / 16
+    x2 = (i + 1) / 16
+    ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.5, facecolor='red', alpha=0.7))
+
+ax_whole.set_xlim(-0.05, 1.05)
+ax_whole.set_ylim(-0.1, 0.7)
+ax_whole.set_title(f'One Inch Showing {numerator}/16', fontweight='bold')
+ax_whole.text(0.5, -0.05, '1 inch = 16/16', ha='center', va='top', fontsize=10)
+ax_whole.axis('off')
+
+# Zoomed view of the measurement
+zoom_start = max(0, (numerator - 2) / 16)
+zoom_end = min(1, (numerator + 2) / 16)
+ax_zoom.add_patch(plt.Rectangle((zoom_start, 0), zoom_end - zoom_start, 0.5, facecolor='lightblue', edgecolor='black'))
+
+for i in range(int(zoom_start * 16), int(zoom_end * 16) + 1):
+    x = i / 16
+    if zoom_start <= x <= zoom_end:
+        ax_zoom.plot([x, x], [0, 0.5], 'k-', linewidth=1)
+        if i == numerator:
+            ax_zoom.plot([x, x], [0, 0.5], 'r-', linewidth=3)
+            ax_zoom.text(x, 0.6, f'{i}/16', ha='center', va='bottom', fontweight='bold', color='red')
+
+ax_zoom.set_xlim(zoom_start - 0.02, zoom_end + 0.02)
+ax_zoom.set_ylim(-0.1, 0.8)
+ax_zoom.set_title(f'Zoomed View: {numerator}/16 = {decimal_result:.4f}"', fontweight='bold')
+ax_zoom.axis('off')
+
+st.pyplot(fig_frac)
+
+# Now show the tape strip with proper understanding
+st.markdown("#### 📋 Plan View: One Strip of Correction Tape")
+
+# Create bird's eye view of tape strip
+fig_tape, ax_tape = plt.subplots(figsize=(8, 3))
+
+# Draw rectangle representing tape strip (6.5" x 3/16")
+tape_length = 6.5
+tape_width = 3/16  # 0.1875 inches
+
+# Scale for visualization (make it bigger so it's visible)
+scale_factor = 10
+rect = plt.Rectangle((0, 0), tape_length, tape_width * scale_factor, 
+                    facecolor='white', edgecolor='black', linewidth=2)
+ax_tape.add_patch(rect)
+
+# Add dimensions
+ax_tape.annotate('', xy=(0, -0.3), xytext=(tape_length, -0.3),
+                arrowprops=dict(arrowstyle='<->', color='blue', lw=2))
+ax_tape.text(tape_length/2, -0.5, f'{tape_length}" long', 
+            ha='center', va='top', fontsize=12, color='blue', fontweight='bold')
+
+ax_tape.annotate('', xy=(-0.3, 0), xytext=(-0.3, tape_width * scale_factor),
+                arrowprops=dict(arrowstyle='<->', color='red', lw=2))
+ax_tape.text(-0.6, (tape_width * scale_factor)/2, f'3/16" wide\n({tape_width:.4f}")', 
+            ha='center', va='center', fontsize=10, color='red', fontweight='bold', rotation=90)
+
+ax_tape.set_xlim(-1, tape_length + 0.5)
+ax_tape.set_ylim(-0.8, tape_width * scale_factor + 0.5)
+ax_tape.set_aspect('equal')
+ax_tape.set_title('📋 Plan View: One Strip of Correction Tape\n(Top-down view, as seen from above)', 
+                 fontsize=14, fontweight='bold', pad=20)
+ax_tape.axis('off')
+
+st.pyplot(fig_tape)
+
+st.markdown(f"""
+**Plan View** (also called "top view"): This shows what the tape strip looks like when viewed from directly above, 
+showing its length and width. 
+
+**Key measurements:**
+- Length: 6.5 inches
+- Width: 3/16 inch = {3/16:.4f} inches (as shown in the calculator above)
+
+Later, we'll see the **cross-section** view of the pencil when we look at it from the side after cutting through it.
+""")
 """)
 
 # Step 1: Estimation
