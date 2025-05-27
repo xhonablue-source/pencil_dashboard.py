@@ -8,12 +8,19 @@ import pandas as pd
 
 # Page configuration
 st.set_page_config(
-    page_title="4th Grade Math: Area and Measurement with a Pencil", 
-    layout="centered"
+    page_title="MathCraft Academy | 4th Grade Area & Measurement", 
+    layout="centered",
+    page_icon="🧮"
 )
 
-# Header
-st.markdown("#### Honablue M.Ed International")
+# Header with logo-style branding
+st.markdown("""
+<div style="text-align: center; padding: 1rem; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 2rem;">
+    <h2 style="color: white; margin: 0; font-weight: bold;">🧮 MathCraft Academy</h2>
+    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Where Mathematics Meets Innovation</p>
+</div>
+""", unsafe_allow_html=True)
+
 st.title("📐 4th Grade Math: Area and Measurement with a Pencil")
 
 # Michigan Learning Standards
