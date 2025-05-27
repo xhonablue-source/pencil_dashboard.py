@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches  # Fixed import!
+import matplotlib.patches as mpatches
 import numpy as np
 import pandas as pd
 
@@ -42,6 +42,7 @@ with st.expander("Click to view aligned standards"):
     - **MP.5** - Use appropriate tools strategically  
     - **MP.6** - Attend to precision
     """)
+
 st.markdown("---")
 
 # Initialize session state
@@ -58,11 +59,9 @@ with col1:
     name = st.text_input("Name:", key="student_name")
 with col2:
     date = st.text_input("Date:", key="student_date")
-
-# Update responses
 st.session_state.responses.update({"Name": name, "Date": date})
 
-# Learning Objective
+# Learning Objective and Materials
 st.markdown("---")
 st.markdown("""
 ### 🧠 Learning Objective
@@ -71,203 +70,98 @@ Use estimation, measurement tools, and mathematical reasoning to explore **area,
 *Students will apply measurement skills and area concepts while practicing estimation strategies and using both standard and non-standard units of measure.*
 
 ### 📦 Materials Needed
-Before we begin, make sure you have these items:
-- 📝 **Wood pencil** (standard #2 pencil)
-- ⚪ **BIC Wite-Out EZ Correct** correction tape dispenser
-- 📏 **Ruler** (with both inches and centimeters)
-
-*Teacher note: Each student or pair of students will need their own set of materials.*
+- 📝 **Wood pencil**
+- ⚪ **BIC Wite-Out EZ Correct**
+- 📏 **Ruler** (inches and centimeters)
 """)
 
 # Step 1: Estimation
 st.markdown("---")
 st.markdown("### 📏 Step 1: Make Your Estimate")
-st.markdown("Look at your pencil. How many strips of white correction tape do you think it will take to cover the entire length?")
-
-estimation = st.slider(
-    "My Estimate (number of strips):", 
-    min_value=1, 
-    max_value=10, 
-    value=4,
-    help="Move the slider to make your best guess!"
-)
-
-# Visual representation of estimate
+estimation = st.slider("My Estimate (number of strips):", min_value=1, max_value=10, value=4)
 fig1, ax1 = plt.subplots(figsize=(6, 3))
 for i in range(10):
     color = "gold" if i < estimation else "lightgray"
     ax1.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
     ax1.text(i + 0.4, 0.5, str(i + 1), ha='center', va='center', fontweight='bold')
-
 ax1.set_xlim(0, 10)
 ax1.set_ylim(0, 1)
-ax1.set_title(f"Your Estimate: {estimation} strips")
-ax1.set_xlabel("Strip Number")
 ax1.axis('off')
+ax1.set_title(f"Your Estimate: {estimation} strips")
 st.pyplot(fig1)
-
 st.session_state.responses["Estimate"] = estimation
 
 # Step 2: Actual Measurement
 st.markdown("---")
 st.markdown("### 📐 Step 2: Measure with Real Tape")
-st.markdown("Now use white correction tape to actually measure your pencil. Count how many strips it takes!")
-
-actual_strips = st.number_input(
-    "Actual number of strips used:", 
-    min_value=1, 
-    max_value=10, 
-    value=1,
-    help="Count each strip of tape you used"
-)
-
-# Visual comparison
+actual_strips = st.number_input("Actual number of strips used:", min_value=1, max_value=10, value=1)
 fig2, (ax2, ax3) = plt.subplots(1, 2, figsize=(10, 3))
-
-# Estimate visualization
 for i in range(10):
-    color = "gold" if i < estimation else "lightgray"
-    ax2.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
+    color1 = "gold" if i < estimation else "lightgray"
+    ax2.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color1, edgecolor='black'))
+    color2 = "orange" if i < actual_strips else "lightgray"
+    ax3.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color2, edgecolor='black'))
 ax2.set_xlim(0, 10)
 ax2.set_ylim(0, 1)
-ax2.set_title(f"Estimate: {estimation} strips")
 ax2.axis('off')
-
-# Actual visualization
-for i in range(10):
-    color = "orange" if i < actual_strips else "lightgray"
-    ax3.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
+ax2.set_title(f"Estimate: {estimation}")
 ax3.set_xlim(0, 10)
 ax3.set_ylim(0, 1)
-ax3.set_title(f"Actual: {actual_strips} strips")
 ax3.axis('off')
-
+ax3.set_title(f"Actual: {actual_strips}")
 st.pyplot(fig2)
-
 st.session_state.responses["Actual_Strips"] = actual_strips
-
-# Comparison Analysis
 difference = abs(estimation - actual_strips)
-st.markdown("### 🤔 How Did You Do?")
 if estimation == actual_strips:
     st.success("🎯 Perfect! Your estimate matched exactly!")
 else:
-    st.info(f"Your estimate was off by {difference} strip(s). That's still great estimation practice!")
+    st.info(f"Your estimate was off by {difference} strip(s).")
 
 # Step 3: Ruler Measurements
 st.markdown("---")
 st.markdown("### 📏 Step 3: Measure with a Ruler")
-st.markdown("Use a real ruler to measure your pencil in both inches and centimeters.")
-
 col1, col2 = st.columns(2)
 with col1:
     inches = st.number_input("Length in inches:", min_value=0.0, step=0.1, format="%.1f")
 with col2:
     centimeters = st.number_input("Length in centimeters:", min_value=0.0, step=0.1, format="%.1f")
-
 st.session_state.responses.update({"Inches": inches, "Centimeters": centimeters})
-
 if inches > 0 and centimeters > 0:
     ratio = centimeters / inches
     st.info(f"📊 Conversion: 1 inch ≈ {ratio:.1f} centimeters")
 
-# Step 4: Cross Section Exploration
+# Step 4: Cross Section
 st.markdown("---")
 st.markdown("### ⭕ Step 4: Explore the Pencil's Cross Section")
-st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. How many tape pieces would it take to go around?")
-
-circumference_estimate = st.slider(
-    "Estimate: white tape pieces around the circumference:",
-    min_value=1,
-    max_value=8,
-    value=6
-)
-
-# Draw cross section
+circumference_estimate = st.slider("Estimate: white tape pieces around the circumference:", 1, 8, 6)
 fig3, ax4 = plt.subplots(figsize=(6, 6))
-circle = plt.Circle((0, 0), 1, color='#DEB887', alpha=0.7)
-ax4.add_patch(circle)
-
-# Add segments around the circle - divide into circumference_estimate sections
-degrees_per_section = 360 / circumference_estimate
+ax4.add_patch(plt.Circle((0, 0), 1, color='#DEB887', alpha=0.7))
+angle = 360 / circumference_estimate
 for i in range(circumference_estimate):
-    theta1 = i * degrees_per_section
-    theta2 = (i + 1) * degrees_per_section
-    
-    wedge = mpatches.Wedge(
-        (0, 0), 1.2, theta1, theta2, 
-        width=0.15, facecolor="white", 
-        edgecolor='black', alpha=0.8
-    )
+    wedge = mpatches.Wedge((0, 0), 1.2, i * angle, (i + 1) * angle, width=0.15, facecolor="white", edgecolor='black', alpha=0.8)
     ax4.add_patch(wedge)
-
 ax4.set_xlim(-1.5, 1.5)
 ax4.set_ylim(-1.5, 1.5)
-ax4.set_aspect('equal')
-ax4.set_title(f"Pencil Cross Section - {circumference_estimate} white tape pieces around edge")
 ax4.axis('off')
+ax4.set_aspect('equal')
+ax4.set_title(f"{circumference_estimate} tape pieces around")
 st.pyplot(fig3)
-
 st.session_state.responses["Circumference_Estimate"] = circumference_estimate
 
-# Step 5: Area Concept
+# Step 5: Area Calculator
 st.markdown("---")
 st.markdown("### 📦 Step 5: Understanding Area")
-st.markdown("""
-If you could unwrap all the correction tape from your pencil and lay it flat, you'd get a rectangle!
-- **Length** = length of your pencil
-- **Width** = width of one tape strip
-- **Number of strips** = how many strips went around (from cross section)
-- **Total Area** = Length × Width × Number of strips around
-""")
-
-# Area Calculator Section
 st.markdown("#### 🧮 Area Calculator")
-st.markdown("Enter your measurements to calculate the total surface area:")
-
 col1, col2, col3 = st.columns(3)
 with col1:
-    calc_length = st.number_input(
-        "Length (inches):", 
-        min_value=0.0, 
-        step=0.1, 
-        value=float(inches) if inches > 0 else 0.0,
-        format="%.1f",
-        key="calc_length"
-    )
+    calc_length = st.number_input("Length (inches):", 0.0, step=0.1, value=float(inches) if inches > 0 else 0.0, format="%.1f", key="calc_length")
 with col2:
-    calc_width = st.number_input(
-        "Correction tape width (inches):", 
-        min_value=0.0, 
-        step=0.1, 
-        value=0.2,
-        format="%.1f",
-        key="calc_width",
-        help="White-out correction tape is typically about 0.2 inches wide"
-    )
+    calc_width = st.number_input("Correction tape width (inches):", 0.0, step=0.1, value=0.2, format="%.1f", key="calc_width")
 with col3:
-    calc_strips = st.number_input(
-        "Number of strips around:", 
-        min_value=1, 
-        max_value=12, 
-        value=circumference_estimate if circumference_estimate > 0 else 1,
-        key="calc_strips"
-    )
-
-# Calculate and display result
+    calc_strips = st.number_input("Number of strips around:", 1, 12, value=circumference_estimate if circumference_estimate > 0 else 1, key="calc_strips")
 if calc_length > 0 and calc_width > 0 and calc_strips > 0:
     total_area = calc_length * calc_width * calc_strips
-    
-    # Display calculation
-    st.markdown("#### 📊 Your Calculation:")
-    st.markdown(f"""
-    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.2f} square inches**
-    """)
-    
-    # Show result prominently
     st.success(f"🎯 Total Surface Area: **{total_area:.2f} square inches**")
-    
-    # Save to responses
     st.session_state.responses.update({
         "Calculated_Area": total_area,
         "Calc_Length": calc_length,
@@ -280,27 +174,22 @@ else:
 # Reflection Questions
 st.markdown("---")
 st.markdown("### 💭 Reflection Questions")
-
 reflection1 = st.text_area("1. What surprised you most about measuring your pencil?")
 reflection2 = st.text_area("2. Why might estimation be a useful skill in real life?")
 reflection3 = st.text_area("3. Which measurement (inches or centimeters) felt more natural to you? Why?")
-
 st.session_state.responses.update({
     "Reflection_1": reflection1,
     "Reflection_2": reflection2,
     "Reflection_3": reflection3
 })
 
-# Submit
+# Submit Section
 st.markdown("---")
-st.markdown("### ✅ Submit Your Complete Work") Section
-st.markdown("---")
+st.markdown("### ✅ Submit Your Complete Work")
 if st.button("✅ Submit My Work", type="primary"):
     if name and date:
         st.session_state.all_responses.append(st.session_state.responses.copy())
         st.success("Great work! Your responses have been saved.")
-        
-        # Show summary
         st.markdown("### 📊 Your Summary")
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -312,7 +201,7 @@ if st.button("✅ Submit My Work", type="primary"):
     else:
         st.error("Please fill in your name and date before submitting!")
 
-# Vocabulary Section
+# Vocabulary
 with st.expander("📚 Vocabulary Helper"):
     vocab_terms = {
         "Estimation": "A careful, educated guess about a number or measurement",
@@ -324,17 +213,14 @@ with st.expander("📚 Vocabulary Helper"):
         "Cross Section": "What you see when you cut straight through an object",
         "Conversion": "Changing from one unit of measurement to another"
     }
-    
     for term, definition in vocab_terms.items():
         st.markdown(f"**{term}**: {definition}")
 
-# Teacher's Data View
+# Teacher View
 if st.checkbox("🏫 Teacher View: Show All Student Data"):
     if st.session_state.all_responses:
         df = pd.DataFrame(st.session_state.all_responses)
         st.dataframe(df, use_container_width=True)
-        
-        # Quick stats
         if len(df) > 0:
             st.markdown("### 📈 Class Statistics")
             col1, col2, col3 = st.columns(3)
