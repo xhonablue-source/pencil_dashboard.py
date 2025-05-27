@@ -375,11 +375,11 @@ if estimation == actual_strips:
 else:
     st.info(f"Your estimate was off by {difference} strip(s). That's still great estimation practice!")
 
-# Error Ratio Tutorial
+# Error Ratio Tutorial - Auto Calculator
 st.markdown("### 💡 Estimation Tutorial: Understanding Error")
-st.markdown("""
-Now let's analyze your estimate compared to the actual number:
+st.markdown("Now let's analyze your estimate compared to the actual number:")
 
+st.markdown("""
 **Step 1:** Find the **difference** between your estimate and the actual value.
 
 **Step 2:** Divide that difference by the actual number of strips to get the **error ratio**.
@@ -392,26 +392,87 @@ This helps us understand how close your guess was. Smaller ratios mean better ac
 """)
 
 if actual_strips > 0:
+    # Auto-calculate based on their responses
     error_ratio = round(difference / actual_strips, 2)
     percent_error = round((difference / actual_strips) * 100, 1)
     percent_accuracy = round(100 - percent_error, 1)
     over_under = "above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exact")
     
-    st.markdown(f"**Your Error Ratio:** `{difference} / {actual_strips}` = **{error_ratio}**")
-    st.markdown(f"**Percent Error:** {percent_error}%")
-    st.markdown(f"**Percent Accuracy:** {percent_accuracy}%")
+    # Create auto-output calculator display
+    st.markdown("#### 🧮 **Your Automatic Error Calculator Results**")
+    
+    # Step-by-step calculation display
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.markdown(f"""
+        **Step 1 - Find the difference:**
+        - Your estimate: **{estimation}** strips
+        - Actual count: **{actual_strips}** strips  
+        - Difference: |{estimation} - {actual_strips}| = **{difference}** strips
+        
+        **Step 2 - Calculate error ratio:**
+        - Error Ratio = {difference} ÷ {actual_strips} = **{error_ratio}**
+        
+        **Step 3 - Convert to percentages:**
+        - Percent Error: {difference} ÷ {actual_strips} × 100 = **{percent_error}%**
+        - Percent Accuracy: 100 - {percent_error} = **{percent_accuracy}%**
+        """)
+    
+    with col2:
+        # Visual summary box
+        st.markdown(f"""
+        <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; text-align: center;">
+            <h4 style="margin: 0; color: white;">📊 Your Results</h4>
+            <p style="margin: 0.5rem 0; font-size: 1.2rem;"><strong>Error Ratio: {error_ratio}</strong></p>
+            <p style="margin: 0.5rem 0;"><strong>Accuracy: {percent_accuracy}%</strong></p>
+            <p style="margin: 0.5rem 0;"><strong>You estimated {over_under}</strong></p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Interpretation with feedback
+    st.markdown("#### 🎯 **What This Means:**")
     
     if over_under != "exact":
-        st.markdown(f"You estimated **{over_under}** the actual amount.")
+        st.markdown(f"You estimated **{over_under}** the actual amount by **{difference}** strips.")
     else:
-        st.markdown("You estimated the exact amount! Great precision!")
+        st.markdown("🌟 You estimated the exact amount! Perfect precision!")
     
+    # Performance feedback
+    if error_ratio == 0:
+        st.success("🌟 **Perfect estimation!** Error ratio = 0 - You nailed it!")
+    elif error_ratio <= 0.2:
+        st.success(f"🎯 **Excellent estimation!** Error ratio = {error_ratio} (≤ 0.2 is great!)")
+    elif error_ratio <= 0.5:
+        st.info(f"👍 **Good estimation!** Error ratio = {error_ratio} (≤ 0.5 is solid work!)")
+    elif error_ratio <= 1.0:
+        st.warning(f"📈 **Room for improvement!** Error ratio = {error_ratio} - Keep practicing!")
+    else:
+        st.warning(f"🎯 **Try again!** Error ratio = {error_ratio} - This was a tough one to estimate!")
+    
+    # Store all the calculated values
     st.session_state.responses.update({
         "Error_Ratio": error_ratio,
         "Percent_Error": percent_error,
         "Percent_Accuracy": percent_accuracy,
-        "Over_Under": over_under
+        "Over_Under": over_under,
+        "Difference": difference
     })
+    
+    # Optional: Show the calculation breakdown
+    with st.expander("🔍 See the detailed calculation breakdown"):
+        st.markdown(f"""
+        **Mathematical Breakdown:**
+        
+        1. **Absolute Difference**: |{estimation} - {actual_strips}| = {difference}
+        2. **Error Ratio**: {difference} ÷ {actual_strips} = {difference/actual_strips:.4f} ≈ {error_ratio}
+        3. **Percent Error**: ({difference} ÷ {actual_strips}) × 100 = {(difference/actual_strips)*100:.1f}%
+        4. **Percent Accuracy**: 100% - {percent_error}% = {percent_accuracy}%
+        5. **Direction**: {estimation} {">" if estimation > actual_strips else ("<" if estimation < actual_strips else "=")} {actual_strips}, so you estimated {"above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exactly")}
+        """)
+
+else:
+    st.info("Complete Step 2 above to see your automatic error calculation!")
 
 # Step 3: Ruler Measurements
 st.markdown("---")
