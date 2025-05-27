@@ -214,16 +214,11 @@ ax_tape.axis('off')
 
 st.pyplot(fig_tape)
 
-st.markdown("""
-**Plan View** (also called "top view"): This shows what the tape strip looks like when viewed from directly above, 
-showing its length and width. 
-
-**Key measurements:**
-- Length: 6.5 inches
-- Width: 3/16 inch = 0.1875 inches (as shown in the calculator above)
-
-Later, we'll see the cross-section view of the pencil when we look at it from the side after cutting through it.
-""")
+st.markdown("**Plan View** (also called 'top view'): This shows what the tape strip looks like when viewed from directly above, showing its length and width.")
+st.markdown("**Key measurements:**")
+st.markdown("- Length: 6.5 inches")
+st.markdown("- Width: 3/16 inch = 0.1875 inches (as shown in the calculator above)")
+st.markdown("Later, we'll see the cross-section view of the pencil when we look at it from the side after cutting through it.")
 """)
 
 # Step 1: Estimation
