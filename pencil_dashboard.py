@@ -176,6 +176,38 @@ if estimation == actual_strips:
 else:
     st.info(f"Your estimate was off by {difference} strip(s). That's still great estimation practice!")
 
+# Error Ratio Tutorial
+st.markdown("### 💡 Estimation Tutorial: Understanding Error")
+st.markdown("""
+Now let's analyze your estimate compared to the actual number:
+
+**Step 1:** Find the **difference** between your estimate and the actual value.
+
+**Step 2:** Divide that difference by the actual number of strips to get the **error ratio**.
+
+**Step 3:** Use this formula: 
+
+`Error Ratio = |Estimate - Actual| / Actual`
+
+This helps us understand how close your guess was. Smaller ratios mean better accuracy!
+""")
+
+if actual_strips > 0:
+    error_ratio = round(difference / actual_strips, 2)
+    st.markdown(f"**Your Error Ratio:** `{difference} / {actual_strips}` = **{error_ratio}**")
+    
+    # Interpret the error ratio
+    if error_ratio == 0:
+        st.success("🌟 Perfect estimation! Error ratio = 0")
+    elif error_ratio <= 0.2:
+        st.success("🎯 Excellent estimation! Error ratio ≤ 0.2")
+    elif error_ratio <= 0.5:
+        st.info("👍 Good estimation! Error ratio ≤ 0.5")
+    else:
+        st.warning("📈 Room for improvement! Keep practicing estimation!")
+    
+    st.session_state.responses["Error_Ratio"] = error_ratio
+
 # Step 3: Ruler Measurements
 st.markdown("---")
 st.markdown("### 📏 Step 3: Measure with a Ruler")
