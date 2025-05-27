@@ -59,89 +59,73 @@ same = st.text_input("Did your estimated and actual count come out the same?")
 diff = st.text_input("If not, how many more or less did you estimate?")
 st.session_state["responses"].update({"Same Estimate/Actual": same, "Difference": diff})
 
-# Step 2
-st.markdown("---\n\n### Step 2: Sketch Your Strip Estimate")
-st.markdown("Take your marker and run it along the pencil full length. Then draw how many strips you think you marked directly on the screen.")
+# Interactive Fraction Tutorial
+st.markdown("---\n\n### 📏 Interactive Fraction Tutorial")
+st.markdown("#### Understanding Sixteenths of an Inch")
+st.markdown("Let's learn how fractions work on a ruler!")
 
-# Step 3
-st.markdown("---\n\n### Step 3: Confirm Measurement")
-st.markdown("Use yellow tape to measure the full length of the pencil. Count how many strips it actually took.")
-real_strip_count = st.text_input("Actual number of strips used:")
-st.session_state["responses"].update({"Real Strips": real_strip_count})
-
-# Step 3.5
-st.markdown("---\n\n### 📏 Step 3.5: Compare Inches and Centimeters")
-st.markdown("Use a real ruler. Notice that inches and centimeters are on opposite sides of the ruler.")
-st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Ruler_inches_cm.svg/1200px-Ruler_inches_cm.svg.png", caption="Sample ruler with inches and centimeters on opposite sides.", use_container_width=True)
-inches = st.text_input("What is the pencil's length in inches?")
-centimeters = st.text_input("What is the pencil's length in centimeters?")
-st.session_state["responses"].update({"Inches": inches, "Centimeters": centimeters})
-
-with st.expander("📘 Analytical Thinking"):
-    st.markdown("""
-    - What does this tell you about inches compared to centimeters?
-    - What words can apply? (e.g. *greater than*, *less than*)
-    - What might a **conversion** look like between inches and centimeters?
-    """)
-
-# Step 4
-st.markdown("---\n\n### Step 4: Sketch Total Area from Strips")
-st.markdown("Draw all the yellow strips stacked on top of each other (like rectangles) to represent the total tape area directly on the screen.")
-
-# Step 5
-st.markdown("---\n\n### Step 5: Explore the Pencil's Cross Section")
-st.markdown("Click how many yellow tape arcs to shade around the outside edge.")
-arc_selections = st.multiselect("Select arcs to shade yellow:", options=list(range(1, 7)), default=[])
-st.session_state["responses"].update({"Arcs Shaded": arc_selections})
-
-fig3, ax3 = plt.subplots()
-ax3.add_patch(plt.Circle((0.5, 0.5), 0.41, color='black', zorder=0))
-for i in range(6):
-    theta1 = i * (360 / 6)
-    theta2 = (i + 1) * (360 / 6)
-    color = "gold" if (i + 1) in arc_selections else "#fefefe"
-    wedge = mpatches.Wedge((0.5, 0.5), 0.4, theta1, theta2, width=0.1, facecolor=color, edgecolor='black')
-    ax3.add_patch(wedge)
-ax3.add_patch(plt.Circle((0.5, 0.5), 0.3, color='#DEB887'))
-ax3.text(0.5, 0.5, "pencil\ncross section", ha='center', va='center', fontsize=8, color='white')
-ax3.set_aspect('equal')
-ax3.axis('off')
-ax3.set_title("Yellow Tape Segments Around Circular End")
-st.pyplot(fig3)
-
-# Step 6
-st.markdown("---\n\n### 📦 Step 6: Flatten the Pencil — Area Visualization")
-st.markdown("""
-When you wrap vertical strips of yellow tape around the pencil and then unroll it, you form a rectangle:
-- **Length** = the actual length of the pencil
-- **Width** = the number of strips it took to go around
-- **Area** = Length × Strip Count
-""")
-
-# Submit and show data
-if st.button("✅ Submit My Work"):
-    st.session_state["all_responses"].append(st.session_state["responses"].copy())
-    st.success("Your responses have been recorded.")
-
-if st.checkbox("📊 Show All Responses"):
-    if st.session_state["all_responses"]:
-        df_all = pd.DataFrame(st.session_state["all_responses"])
-        st.dataframe(df_all)
+fig_ruler, ax_ruler = plt.subplots(figsize=(10, 2))
+ruler_length = 2
+ax_ruler.add_patch(plt.Rectangle((0, 0), ruler_length, 0.5, facecolor='lightgray', edgecolor='black'))
+for i in range(3):
+    ax_ruler.plot([i, i], [0, 0.5], 'k-', linewidth=3)
+    ax_ruler.text(i, -0.1, f'{i}\"', ha='center', va='top', fontweight='bold', fontsize=12)
+for i in range(ruler_length * 16 + 1):
+    x = i / 16
+    if i % 16 == 0:
+        continue
+    elif i % 8 == 0:
+        ax_ruler.plot([x, x], [0, 0.4], 'k-', linewidth=2)
+    elif i % 4 == 0:
+        ax_ruler.plot([x, x], [0, 0.35], 'k-', linewidth=1.5)
+    elif i % 2 == 0:
+        ax_ruler.plot([x, x], [0, 0.25], 'k-', linewidth=1)
     else:
-        st.warning("No responses recorded yet.")
+        ax_ruler.plot([x, x], [0, 0.15], 'k-', linewidth=0.5)
+ax_ruler.set_xlim(-0.1, 2.1)
+ax_ruler.set_ylim(-0.3, 0.8)
+ax_ruler.axis('off')
+ax_ruler.set_title("Ruler Showing Sixteenths of an Inch")
+st.pyplot(fig_ruler)
 
-# Vocabulary
-st.markdown("### 📚 Vocabulary")
+numerator = st.slider("Select a numerator (top number):", 1, 16, 3)
+st.markdown("Denominator (bottom number): 16")
+st.markdown(f"**Your fraction:** {numerator}/16")
+decimal_result = numerator / 16
+st.markdown(f"**Decimal equivalent:** {numerator}/16 = {decimal_result:.4f} inches")
+
+fig_frac, (ax_whole, ax_zoom) = plt.subplots(1, 2, figsize=(10, 2))
+ax_whole.add_patch(plt.Rectangle((0, 0), 1, 0.5, facecolor='lightblue', edgecolor='black'))
+for i in range(17):
+    x = i / 16
+    ax_whole.plot([x, x], [0, 0.5], 'k-', linewidth=0.5)
+for i in range(numerator):
+    x1 = i / 16
+    x2 = (i + 1) / 16
+    ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.5, facecolor='red', alpha=0.7))
+ax_whole.set_xlim(-0.05, 1.05)
+ax_whole.set_ylim(-0.1, 0.7)
+ax_whole.axis('off')
+ax_whole.set_title(f"One Inch Showing {numerator}/16")
+zoom_start = max(0, (numerator - 2) / 16)
+zoom_end = min(1, (numerator + 2) / 16)
+ax_zoom.add_patch(plt.Rectangle((zoom_start, 0), zoom_end - zoom_start, 0.5, facecolor='lightblue', edgecolor='black'))
+for i in range(int(zoom_start * 16), int(zoom_end * 16) + 1):
+    x = i / 16
+    if zoom_start <= x <= zoom_end:
+        ax_zoom.plot([x, x], [0, 0.5], 'k-', linewidth=1)
+        if i == numerator:
+            ax_zoom.plot([x, x], [0, 0.5], 'r-', linewidth=3)
+            ax_zoom.text(x, 0.6, f'{i}/16', ha='center', va='bottom', fontweight='bold', color='red')
+ax_zoom.set_xlim(zoom_start - 0.02, zoom_end + 0.02)
+ax_zoom.set_ylim(-0.1, 0.8)
+ax_zoom.axis('off')
+ax_zoom.set_title(f"Zoomed View: {numerator}/16 = {decimal_result:.4f}\"")
+st.pyplot(fig_frac)
+
 st.markdown("""
-- **Estimation**: A careful guess about a number or measurement.
-- **Measurement**: Finding the size, length, or amount of something.
-- **Length**: The longest dimension of an object.
-- **Width**: The measurement of something from side to side.
-- **Area**: The amount of space a surface covers; calculated by multiplying length × width.
-- **Circumference**: The distance around a circle.
-- **Cross Section**: A shape made by cutting straight through an object.
-- **Rectangle**: A 2D shape with four sides and four right angles.
-- **Inches**: A standard unit of length in the US customary system.
-- **Centimeters**: A unit of length in the metric system.
-- **Conversion**: Changing from one unit of measurement to another.
+#### 📋 Plan View: One Strip of Correction Tape
+This shows what the tape strip looks like when viewed from directly above.
+- Length: 6.5 inches
+- Width: 3/16 inch = 0.1875 inches
 """)
