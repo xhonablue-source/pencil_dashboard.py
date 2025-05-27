@@ -29,18 +29,28 @@ st.markdown("---")
 st.markdown("### 📚 Michigan Learning Standards Addressed")
 with st.expander("Click to view aligned standards"):
     st.markdown("""
-    **4.MD.1** - Know relative sizes of measurement units within one system of units.
+    **4.MD.1** - Know relative sizes of measurement units within one system of units including km, m, cm; kg, g; lb, oz.; l, ml; hr, min, sec. Within a single system of measurement, express measurements in a larger unit in terms of a smaller unit.
+    *Applied through: Converting between inches and centimeters, understanding fractions of an inch (3/16), decimal conversions*
     
-    **4.MD.2** - Use the four operations to solve word problems involving distances, measurements, and money.
+    **4.MD.2** - Use the four operations to solve word problems involving distances, intervals of time, liquid volumes, masses of objects, and money, including problems involving simple fractions or decimals.
+    *Applied through: Multi-step word problems using surface area calculations, working with fractions (3/16 inch), estimation error calculations*
     
-    **4.MD.3** - Apply the area formulas for rectangles in real world problems.
+    **4.MD.3** - Apply the area and perimeter formulas for rectangles in real world and mathematical problems.
+    *Applied through: Surface area formula (Length × Width × Number of strips), calculating area of tape strips, real-world application to pencil covering*
     
-    **4.OA.3** - Solve multistep word problems using the four operations.
+    **4.OA.3** - Solve multistep word problems posed with whole numbers and having whole-number answers using the four operations, including problems in which remainders must be interpreted.
+    *Applied through: Estimation vs. actual comparisons, error ratio calculations, multi-step area problems*
+    
+    **4.NF.6** - Use decimal notation for fractions with denominators 10 or 100.
+    *Applied through: Converting 3/16 to decimal form (0.1875), understanding decimal representations*
     
     **Mathematical Practices:**
-    - **MP.1** - Make sense of problems and persevere
-    - **MP.5** - Use appropriate tools strategically
-    - **MP.6** - Attend to precision
+    - **MP.1** - Make sense of problems and persevere in solving them
+    - **MP.2** - Reason abstractly and quantitatively *(error ratios, percent calculations)*
+    - **MP.3** - Construct viable arguments and critique reasoning *(analytical thinking about estimates)*
+    - **MP.4** - Model with mathematics *(surface area formula, real-world applications)*
+    - **MP.5** - Use appropriate tools strategically *(rulers, fraction visualization, correction tape)*
+    - **MP.6** - Attend to precision *(fraction measurements, decimal accuracy)*
     """)
 st.markdown("---")
 
