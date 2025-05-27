@@ -399,7 +399,7 @@ if actual_strips > 0:
     over_under = "above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exact")
     
     # Create auto-output calculator display
-    st.markdown("#### 🧮 **Your Automatic Estimation Error Calculator Results**")
+    st.markdown("#### 🧮 **Your Estimation Error Calculator Results**")
     
     # Step-by-step calculation display
     col1, col2 = st.columns([2, 1])
@@ -472,7 +472,7 @@ if actual_strips > 0:
         """)
 
 else:
-    st.info("Complete Step 2 above to see your automatic estimation error calculation!")
+    st.info("Complete Step 2 above to see your estimation error calculation!")
 
 # Step 3: Ruler Measurements
 st.markdown("---")
