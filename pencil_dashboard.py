@@ -77,7 +77,6 @@ st.markdown("Look at your pencil. How many strips of white correction tape do yo
 
 estimation = st.slider("My Estimate (number of strips):", 1, 10, 4)
 
-# Estimate visual
 fig1, ax1 = plt.subplots(figsize=(6, 3))
 for i in range(10):
     color = "gold" if i < estimation else "lightgray"
@@ -117,17 +116,31 @@ if estimation == actual_strips:
 else:
     st.info(f"Your estimate was off by {difference} strip(s). That's still great estimation practice!")
 
-# Step 3: Ruler Measurement
+# Step 3: Length and Width
 st.markdown("---")
-st.markdown("### 📏 Step 3: Measure with a Ruler")
+st.markdown("### 📏 Step 3: Measure the Length of the Pencil and Width of the White Strip")
+
 col1, col2 = st.columns(2)
 with col1:
-    inches = st.number_input("Length in inches:", min_value=0.0, step=0.1, format="%.1f")
+    inches = st.number_input("Pencil Length (in inches):", min_value=0.0, step=0.1, format="%.1f")
 with col2:
-    centimeters = st.number_input("Length in centimeters:", min_value=0.0, step=0.1, format="%.1f")
-st.session_state.responses.update({"Inches": inches, "Centimeters": centimeters})
-if inches > 0 and centimeters > 0:
-    st.info(f"📊 Conversion: 1 inch ≈ {centimeters / inches:.1f} cm")
+    width_fraction = st.selectbox(
+        "Tape Width (fraction of an inch):",
+        options=["1/8", "1/4", "1/3", "3/8", "1/2", "2/3", "3/4", "7/8", "1"],
+        index=4
+    )
+
+fraction_map = {
+    "1/8": 0.125, "1/4": 0.25, "1/3": 1/3, "3/8": 0.375, "1/2": 0.5,
+    "2/3": 2/3, "3/4": 0.75, "7/8": 0.875, "1": 1.0
+}
+tape_width = fraction_map[width_fraction]
+
+st.session_state.responses.update({
+    "Inches": inches,
+    "Tape_Width": tape_width,
+    "Tape_Width_Fraction": width_fraction
+})
 
 # Step 4: Cross Section
 st.markdown("---")
@@ -150,29 +163,25 @@ st.session_state.responses["Circumference_Estimate"] = circumference_estimate
 # Step 5: Area
 st.markdown("---")
 st.markdown("### 📦 Step 5: Understanding Area")
-col1, col2, col3 = st.columns(3)
-with col1:
-    calc_length = st.number_input("Length (inches):", 0.0, step=0.1, value=float(inches) if inches > 0 else 0.0, format="%.1f")
-with col2:
-    calc_width = st.number_input("Correction tape width (inches):", 0.0, step=0.1, value=0.2, format="%.1f")
-with col3:
-    calc_strips = st.number_input("Number of strips around:", 1, 12, value=circumference_estimate if circumference_estimate > 0 else 1)
-if calc_length > 0 and calc_width > 0 and calc_strips > 0:
-    total_area = calc_length * calc_width * calc_strips
+
+if inches > 0 and tape_width > 0 and circumference_estimate > 0:
+    total_area = inches * tape_width * circumference_estimate
     st.success(f"🎯 Total Surface Area: **{total_area:.2f} square inches**")
     st.session_state.responses.update({
         "Calculated_Area": total_area,
-        "Calc_Length": calc_length,
-        "Calc_Width": calc_width,
-        "Calc_Strips": calc_strips
+        "Calc_Length": inches,
+        "Calc_Width": tape_width,
+        "Calc_Strips": circumference_estimate
     })
+else:
+    st.info("Enter all measurements above to calculate the area!")
 
 # Reflection
 st.markdown("---")
 st.markdown("### 💭 Reflection Questions")
 reflection1 = st.text_area("1. What surprised you most about measuring your pencil?")
 reflection2 = st.text_area("2. Why might estimation be a useful skill in real life?")
-reflection3 = st.text_area("3. Which measurement (inches or centimeters) felt more natural to you? Why?")
+reflection3 = st.text_area("3. Which measurement felt more natural to you? Why?")
 st.session_state.responses.update({
     "Reflection_1": reflection1,
     "Reflection_2": reflection2,
