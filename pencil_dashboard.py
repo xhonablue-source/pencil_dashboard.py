@@ -74,12 +74,12 @@ st.session_state.responses.update({"Name": name, "Date": date})
 st.markdown("---")
 st.markdown("""
 ### 🧠 Learning Objective
-Use estimation, measurement tools, and mathematical reasoning to explore **surface area** by covering a pencil with white correction tape strips.
+Use estimation, measurement tools, and mathematical reasoning to explore **surface area** using BIC Wite-Out EZ Correct strips and a pencil.
 
 ### 📦 Materials Needed
 - 📝 **Wood pencil** (standard #2 pencil)
-- ⚪ **BIC Wite-Out EZ Correct** correction tape dispenser
 - 📏 **Ruler** (with both inches and centimeters)
+- 📋 **BIC Wite-Out EZ Correct strip dimensions** (provided below)
 """)
 
 # Area Formula Introduction
@@ -88,8 +88,8 @@ st.markdown("### 🌟 **KEY FORMULA FOR THIS LESSON**")
 st.markdown("""
 <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; margin: 1rem 0;">
     <h3 style="color: white; margin: 0; font-size: 1.5rem;">Surface Area Formula</h3>
-    <h2 style="color: white; margin: 0.5rem 0; font-family: monospace; font-size: 2rem;">Area = Length × Width × Strips</h2>
-    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Length of pencil × Width of tape × Number of strips around</p>
+    <h2 style="color: white; margin: 0.5rem 0; font-family: monospace; font-size: 2rem;">Area = Strips Along × Strips Around × Strip Area</h2>
+    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Number of strips along length × Number around circumference × Area of one strip</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -134,8 +134,8 @@ ax_tape.axis('off')
 st.pyplot(fig_tape)
 
 st.markdown("""
-**Why these measurements matter:**
-- **Length: 6.5 inches** - This is how long each strip is when you pull it from the dispenser
+**Key Strip Specifications:**
+- **Length: 6.5 inches** - This is how long each strip is
 - **Width: 3/16 inch** - This is how wide the tape is (we'll learn about this fraction below!)
 - **Area of ONE strip: 1.2188 square inches** - This is the area each strip covers
 
@@ -272,59 +272,23 @@ Each strip has TWO measurements:
 - **Length of the strip**: 6.5 inches (how long it is)
 - **Width of the strip**: 3/16 inch (how wide it is)
 
-When we calculate the surface area of your pencil, we'll use:
-- **Length**: How long your pencil is (you'll measure this)
-- **Strip width**: 3/16 inch (0.1875 inches) - how wide each strip is
-- **Number of strips**: How many strips go around the pencil to cover its entire length
-
-**Area = Pencil length × Strip width × Number of strips around**
-**Area = Pencil length × 0.1875 × Number of strips around**
+When we calculate the surface area of your pencil, we'll use these strip dimensions to figure out coverage!
 """)
 
 # Step 1: Estimation
 st.markdown("---")
 st.markdown("### 📏 Step 1: Make Your Estimate")
-st.markdown("Look at your pencil. How many strips of white correction tape do you think it will take to completely cover the entire pencil surface? (Think of wrapping the strips around the pencil like rings)")
+st.markdown("Look at your pencil and think about the BIC Wite-Out strips (6.5 inches long, 3/16 inch wide). How many strips do you estimate it would take to completely cover your pencil?")
 
 estimation = st.slider(
-    "My Estimate (number of strips to cover entire pencil):", 
+    "My Estimate (total number of strips to cover pencil):", 
     min_value=1, 
-    max_value=15, 
-    value=8,
-    help="Move the slider to make your best guess!"
+    max_value=20, 
+    value=10,
+    help="Think about how many 6.5\" × 3/16\" strips you'd need!"
 )
 
-# Visual representation of estimate with pencil coverage
-fig1, ax1 = plt.subplots(figsize=(12, 4))
-
-# Draw pencil outline
-pencil_length = 10
-pencil_radius = 0.5
-pencil = plt.Rectangle((0, -pencil_radius), pencil_length, 2*pencil_radius, 
-                      facecolor='#DEB887', edgecolor='black', linewidth=2)
-ax1.add_patch(pencil)
-
-# Add pencil tip
-tip = plt.Polygon([(pencil_length, 0), (pencil_length + 1, 0.2), (pencil_length + 1, -0.2)], 
-                 facecolor='#8B4513', edgecolor='black')
-ax1.add_patch(tip)
-
-# Show estimated tape strips covering the pencil
-strip_width = pencil_length / 15  # Divide pencil into potential strips
-for i in range(15):
-    color = "white" if i < estimation else "lightgray"
-    alpha = 0.8 if i < estimation else 0.3
-    strip = plt.Rectangle((i * strip_width, -pencil_radius), strip_width, 2*pencil_radius, 
-                         facecolor=color, edgecolor='black', alpha=alpha, linewidth=1)
-    ax1.add_patch(strip)
-
-ax1.set_xlim(-0.5, pencil_length + 1.5)
-ax1.set_ylim(-1, 1)
-ax1.set_title(f"Your Estimate: {estimation} strips to cover the entire pencil", fontsize=14, fontweight='bold')
-ax1.text(pencil_length/2, -1.5, "Each white strip wraps around the pencil like a ring", 
-         ha='center', va='top', fontsize=12, style='italic')
-ax1.axis('off')
-st.pyplot(fig1)
+st.markdown(f"**Your estimate: {estimation} strips total**")
 
 st.session_state.responses["Estimate"] = estimation
 
@@ -333,191 +297,23 @@ st.markdown("### 🧠 Analytical Thinking: Reasoning About Estimates")
 st.markdown("Think about your estimation process:")
 st.markdown("""
 - Why is **zero** not a valid option?
-- Is **15** a good maximum estimate? Why or why not?
-- Why might it be unhelpful to allow higher numbers?
-- What would your maximum estimate be?
-- How did you decide that number?
+- Is **20** a reasonable maximum estimate? Why or why not?
+- How did you think about the strip dimensions in your estimate?
+- What factors did you consider?
 """)
 
 estimation_reasoning = st.text_area(
     "Write your thoughts:",
     height=120,
     key="estimation_reasoning",
-    placeholder="Think about: What makes a good estimate? Why do we set limits?"
+    placeholder="Think about: How did the strip size (6.5\" × 3/16\") influence your estimate?"
 )
 
 st.session_state.responses["Estimation_Reasoning"] = estimation_reasoning
 
-# Step 2: Actual Measurement - CORRECTED VERSION
+# Step 2: Ruler Measurements
 st.markdown("---")
-st.markdown("### 📐 Step 2: Cover Your Pencil with Real Tape")
-st.markdown("""
-**Now use white correction tape to actually cover your pencil!**
-
-**Instructions:**
-1. Start at one end of your pencil
-2. Wrap strips of correction tape around your pencil like rings or bands
-3. Each strip should go all the way around the pencil's circumference
-4. Continue wrapping strips until the entire pencil length is covered
-5. Count how many strips it took to cover the whole pencil
-
-**Important:** Each strip wraps AROUND the pencil (like a ring), not along its length!
-""")
-
-actual_strips = st.number_input(
-    "Actual number of strips used to cover entire pencil:", 
-    min_value=1, 
-    max_value=15, 
-    value=1,
-    help="Count each strip of tape you wrapped around your pencil"
-)
-
-# Visual comparison - CORRECTED
-fig2, (ax2, ax3) = plt.subplots(1, 2, figsize=(12, 4))
-
-# Estimate visualization
-pencil = plt.Rectangle((0, -0.5), 10, 1, facecolor='#DEB887', edgecolor='black', linewidth=2)
-ax2.add_patch(pencil)
-strip_width = 10 / 15
-for i in range(15):
-    color = "gold" if i < estimation else "lightgray"
-    alpha = 0.8 if i < estimation else 0.3
-    strip = plt.Rectangle((i * strip_width, -0.5), strip_width, 1, 
-                         facecolor=color, edgecolor='black', alpha=alpha, linewidth=1)
-    ax2.add_patch(strip)
-ax2.set_xlim(-0.5, 10.5)
-ax2.set_ylim(-1, 1)
-ax2.set_title(f"Estimate: {estimation} strips")
-ax2.axis('off')
-
-# Actual visualization
-pencil2 = plt.Rectangle((0, -0.5), 10, 1, facecolor='#DEB887', edgecolor='black', linewidth=2)
-ax3.add_patch(pencil2)
-for i in range(15):
-    color = "orange" if i < actual_strips else "lightgray"
-    alpha = 0.8 if i < actual_strips else 0.3
-    strip = plt.Rectangle((i * strip_width, -0.5), strip_width, 1, 
-                         facecolor=color, edgecolor='black', alpha=alpha, linewidth=1)
-    ax3.add_patch(strip)
-ax3.set_xlim(-0.5, 10.5)
-ax3.set_ylim(-1, 1)
-ax3.set_title(f"Actual: {actual_strips} strips")
-ax3.axis('off')
-
-st.pyplot(fig2)
-
-st.session_state.responses["Actual_Strips"] = actual_strips
-
-# Comparison Analysis
-difference = abs(estimation - actual_strips)
-st.markdown("### 🤔 How Did You Do?")
-if estimation == actual_strips:
-    st.success("🎯 Perfect! Your estimate matched exactly!")
-else:
-    st.info(f"Your estimate was off by {difference} strip(s). That's still great estimation practice!")
-
-# Error Ratio Tutorial - Auto Calculator
-st.markdown("### 💡 Estimation Tutorial: Understanding Your Estimation Error")
-st.markdown("Now let's analyze your **estimation** compared to the actual number:")
-
-st.markdown("""
-**Step 1:** Find the **difference** between your **estimation** and the actual value.
-
-**Step 2:** Divide that difference by the actual number of strips to get your **estimation error ratio**.
-
-**Step 3:** Use this formula: 
-
-`Estimation Error Ratio = |Estimation - Actual| / Actual`
-
-This helps us understand how close your **estimation** was. Smaller ratios mean better **estimation** accuracy!
-""")
-
-if actual_strips > 0:
-    # Auto-calculate based on their responses
-    error_ratio = round(difference / actual_strips, 2)
-    percent_error = round((difference / actual_strips) * 100, 1)
-    percent_accuracy = round(100 - percent_error, 1)
-    over_under = "above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exact")
-    
-    # Create auto-output calculator display
-    st.markdown("#### 🧮 **Your Estimation Error Calculator Results**")
-    
-    # Step-by-step calculation display
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.markdown(f"""
-        **Step 1 - Find the difference:**
-        - Your **estimation**: **{estimation}** strips
-        - Actual count: **{actual_strips}** strips  
-        - Difference: |{estimation} - {actual_strips}| = **{difference}** strips
-        
-        **Step 2 - Calculate estimation error ratio:**
-        - **Estimation Error Ratio** = {difference} ÷ {actual_strips} = **{error_ratio}**
-        
-        **Step 3 - Convert to percentages:**
-        - **Estimation Error**: {difference} ÷ {actual_strips} × 100 = **{percent_error}%**
-        - **Estimation Accuracy**: 100 - {percent_error} = **{percent_accuracy}%**
-        """)
-    
-    with col2:
-        # Visual summary box
-        st.markdown(f"""
-        <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; text-align: center;">
-            <h4 style="margin: 0; color: white;">📊 Your Estimation Results</h4>
-            <p style="margin: 0.5rem 0; font-size: 1.2rem;"><strong>Error Ratio: {error_ratio}</strong></p>
-            <p style="margin: 0.5rem 0;"><strong>Accuracy: {percent_accuracy}%</strong></p>
-            <p style="margin: 0.5rem 0;"><strong>You estimated {over_under}</strong></p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Interpretation with feedback
-    st.markdown("#### 🎯 **What This Means for Your Estimation Skills:**")
-    
-    if over_under != "exact":
-        st.markdown(f"Your **estimation** was **{over_under}** the actual amount by **{difference}** strips.")
-    else:
-        st.markdown("🌟 Your **estimation** was exact! Perfect **estimation** precision!")
-    
-    # Performance feedback
-    if error_ratio == 0:
-        st.success("🌟 **Perfect estimation!** Your estimation error ratio = 0 - You nailed it!")
-    elif error_ratio <= 0.2:
-        st.success(f"🎯 **Excellent estimation skills!** Your estimation error ratio = {error_ratio} (≤ 0.2 is great!)")
-    elif error_ratio <= 0.5:
-        st.info(f"👍 **Good estimation skills!** Your estimation error ratio = {error_ratio} (≤ 0.5 is solid work!)")
-    elif error_ratio <= 1.0:
-        st.warning(f"📈 **Keep practicing your estimation!** Your estimation error ratio = {error_ratio} - Estimation gets better with practice!")
-    else:
-        st.warning(f"🎯 **Estimation challenge!** Your estimation error ratio = {error_ratio} - This was a tough one to estimate!")
-    
-    # Store all the calculated values
-    st.session_state.responses.update({
-        "Estimation_Error_Ratio": error_ratio,
-        "Estimation_Percent_Error": percent_error,
-        "Estimation_Percent_Accuracy": percent_accuracy,
-        "Estimation_Over_Under": over_under,
-        "Estimation_Difference": difference
-    })
-    
-    # Optional: Show the calculation breakdown
-    with st.expander("🔍 See the detailed estimation calculation breakdown"):
-        st.markdown(f"""
-        **Mathematical Breakdown of Your Estimation:**
-        
-        1. **Absolute Difference**: |{estimation} - {actual_strips}| = {difference}
-        2. **Estimation Error Ratio**: {difference} ÷ {actual_strips} = {difference/actual_strips:.4f} ≈ {error_ratio}
-        3. **Estimation Percent Error**: ({difference} ÷ {actual_strips}) × 100 = {(difference/actual_strips)*100:.1f}%
-        4. **Estimation Percent Accuracy**: 100% - {percent_error}% = {percent_accuracy}%
-        5. **Estimation Direction**: {estimation} {">" if estimation > actual_strips else ("<" if estimation < actual_strips else "=")} {actual_strips}, so you estimated {"above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exactly")}
-        """)
-
-else:
-    st.info("Complete Step 2 above to see your estimation error calculation!")
-
-# Step 3: Ruler Measurements
-st.markdown("---")
-st.markdown("### 📏 Step 3: Measure with a Ruler")
+st.markdown("### 📏 Step 2: Measure Your Pencil")
 st.markdown("Use a real ruler to measure your pencil in both inches and centimeters.")
 
 col1, col2 = st.columns(2)
@@ -532,16 +328,17 @@ if inches > 0 and centimeters > 0:
     ratio = centimeters / inches
     st.info(f"📊 Conversion: 1 inch ≈ {ratio:.1f} centimeters")
 
-# Step 4: Cross Section Exploration
+# Step 3: Cross Section Exploration
 st.markdown("---")
-st.markdown("### ⭕ Step 4: Explore the Pencil's Cross Section")
-st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. How many tape pieces would it take to go around the edge once?")
+st.markdown("### ⭕ Step 3: Explore the Pencil's Cross Section")
+st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. Estimate how many BIC strips (3/16\" wide) would fit around the circumference.")
 
 circumference_estimate = st.slider(
-    "Estimate: white tape pieces to go around the circumference once:",
+    "Estimate: BIC strips around the circumference:",
     min_value=1,
-    max_value=8,
-    value=6
+    max_value=12,
+    value=8,
+    help="How many 3/16\" wide strips would go around the pencil's edge?"
 )
 
 # Draw cross section
@@ -565,71 +362,129 @@ for i in range(circumference_estimate):
 ax4.set_xlim(-1.5, 1.5)
 ax4.set_ylim(-1.5, 1.5)
 ax4.set_aspect('equal')
-ax4.set_title(f"Pencil Cross Section - {circumference_estimate} white tape pieces around edge")
+ax4.set_title(f"Pencil Cross Section - {circumference_estimate} BIC strips around edge")
 ax4.axis('off')
 st.pyplot(fig3)
 
 st.session_state.responses["Circumference_Estimate"] = circumference_estimate
 
-# Step 5: Area Calculator
+# Step 4: Calculate Coverage
 st.markdown("---")
-st.markdown("### 📦 Step 5: Understanding Area")
-st.markdown("""
-If you could unwrap all the correction tape from your pencil and lay it flat, you'd get a rectangle!
-- **Length** = length of your pencil
-- **Width** = width of one tape strip (3/16 inch = 0.1875 inches)
-- **Number of strips** = how many strips went around to cover the pencil
-- **Total Area** = Length × Width × Number of strips around
-""")
+st.markdown("### 🧮 Step 4: Calculate BIC Strip Coverage")
+st.markdown("Now let's calculate how many BIC Wite-Out strips we actually need!")
 
-st.markdown("#### 🧮 Area Calculator")
-col1, col2, col3 = st.columns(3)
-with col1:
-    calc_length = st.number_input(
-        "Length (inches):", 
-        min_value=0.0, 
-        step=0.1, 
-        value=float(inches) if inches > 0 else 0.0,
-        format="%.1f",
-        key="calc_length"
-    )
-with col2:
-    calc_width = st.number_input(
-        "Correction tape width (inches):", 
-        min_value=0.0, 
-        step=0.01, 
-        value=0.1875,
-        format="%.4f",
-        key="calc_width",
-        help="BIC Wite-Out correction tape is 3/16 inch = 0.1875 inches wide"
-    )
-with col3:
-    calc_strips = st.number_input(
-        "Number of strips around:", 
-        min_value=1, 
-        max_value=15, 
-        value=actual_strips if actual_strips > 0 else 1,
-        key="calc_strips"
-    )
-
-if calc_length > 0 and calc_width > 0 and calc_strips > 0:
-    total_area = calc_length * calc_width * calc_strips
+if inches > 0:
+    # Calculate strips needed along length
+    strips_along_length = inches / 6.5
+    strips_along_length_rounded = round(strips_along_length)
     
-    st.markdown("#### 📊 Your Calculation:")
     st.markdown(f"""
-    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.4f} square inches**
+    **Strips needed along the length:**
+    - Pencil length: **{inches}** inches
+    - BIC strip length: **6.5** inches
+    - Strips needed: {inches} ÷ 6.5 = **{strips_along_length:.2f}** strips
+    - Rounded to whole strips: **{strips_along_length_rounded}** strips
     """)
     
-    st.success(f"🎯 Total Surface Area: **{total_area:.4f} square inches**")
+    # Calculate total strips needed
+    total_calculated_strips = strips_along_length_rounded * circumference_estimate
+    
+    st.markdown(f"""
+    **Total strips needed:**
+    - Strips along length: **{strips_along_length_rounded}**
+    - Strips around circumference: **{circumference_estimate}**
+    - Total strips: {strips_along_length_rounded} × {circumference_estimate} = **{total_calculated_strips}** strips
+    """)
+    
+    # Store calculated results
+    st.session_state.responses.update({
+        "Strips_Along_Length": strips_along_length,
+        "Strips_Along_Length_Rounded": strips_along_length_rounded,
+        "Total_Calculated_Strips": total_calculated_strips
+    })
+    
+    # Compare with estimate
+    st.markdown("### 🤔 How Did Your Estimate Compare?")
+    difference = abs(estimation - total_calculated_strips)
+    
+    if estimation == total_calculated_strips:
+        st.success("🎯 Perfect! Your estimate matched exactly!")
+    else:
+        st.info(f"Your estimate was **{estimation}** strips, actual calculation is **{total_calculated_strips}** strips. Difference: **{difference}** strips.")
+    
+    # Error ratio calculation
+    if total_calculated_strips > 0:
+        error_ratio = round(difference / total_calculated_strips, 2)
+        percent_error = round((difference / total_calculated_strips) * 100, 1)
+        percent_accuracy = round(100 - percent_error, 1)
+        over_under = "above" if estimation > total_calculated_strips else ("below" if estimation < total_calculated_strips else "exact")
+        
+        st.markdown("#### 🧮 **Your Estimation Analysis**")
+        
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            st.markdown(f"""
+            **Estimation vs. Calculation:**
+            - Your **estimation**: **{estimation}** strips
+            - Calculated result: **{total_calculated_strips}** strips  
+            - Difference: **{difference}** strips
+            - **Estimation Error Ratio**: {difference} ÷ {total_calculated_strips} = **{error_ratio}**
+            - **Estimation Accuracy**: **{percent_accuracy}%**
+            """)
+        
+        with col2:
+            st.markdown(f"""
+            <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; text-align: center;">
+                <h4 style="margin: 0; color: white;">📊 Results</h4>
+                <p style="margin: 0.5rem 0;"><strong>Error Ratio: {error_ratio}</strong></p>
+                <p style="margin: 0.5rem 0;"><strong>Accuracy: {percent_accuracy}%</strong></p>
+                <p style="margin: 0.5rem 0;"><strong>Estimated {over_under}</strong></p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Store estimation analysis
+        st.session_state.responses.update({
+            "Estimation_Error_Ratio": error_ratio,
+            "Estimation_Percent_Error": percent_error,
+            "Estimation_Percent_Accuracy": percent_accuracy,
+            "Estimation_Over_Under": over_under,
+            "Estimation_Difference": difference
+        })
+
+else:
+    st.info("Enter your pencil length in Step 2 to see the calculations!")
+
+# Step 5: Surface Area Calculator
+st.markdown("---")
+st.markdown("### 📦 Step 5: Calculate Total Surface Area")
+st.markdown("""
+Now let's calculate the total surface area that would be covered by all the BIC Wite-Out strips!
+
+**Remember:** Each BIC strip has an area of 6.5" × 3/16" = 1.2188 square inches
+""")
+
+if inches > 0 and 'Total_Calculated_Strips' in st.session_state.responses:
+    total_strips = st.session_state.responses['Total_Calculated_Strips']
+    strip_area = 6.5 * (3/16)  # 1.2188 square inches
+    total_surface_area = total_strips * strip_area
+    
+    st.markdown("#### 🧮 Surface Area Calculation")
+    st.markdown(f"""
+    **Calculation:**
+    - Number of strips needed: **{total_strips}**
+    - Area per strip: 6.5" × 3/16" = **{strip_area:.4f}** square inches
+    - Total surface area: {total_strips} × {strip_area:.4f} = **{total_surface_area:.4f}** square inches
+    """)
+    
+    st.success(f"🎯 **Total Surface Area: {total_surface_area:.4f} square inches**")
     
     st.session_state.responses.update({
-        "Calculated_Area": total_area,
-        "Calc_Length": calc_length,
-        "Calc_Width": calc_width,
-        "Calc_Strips": calc_strips
+        "Strip_Area": strip_area,
+        "Total_Surface_Area": total_surface_area
     })
 else:
-    st.info("Enter all measurements above to calculate the area!")
+    st.info("Complete Steps 2 and 4 to calculate the surface area!")
 
 # Word Problems
 st.markdown("---")
@@ -637,47 +492,47 @@ st.markdown("### 📝 Challenge Word Problems")
 
 st.markdown("#### 📚 **Problem 1: Classroom Pencils**")
 st.markdown("""
-**Ms. Garcia** has 4 new pencils for her reading group. Each pencil is 8 inches long. 
-She uses correction tape that is 3/16 inch wide (0.1875 inches), and it takes 6 strips of tape to go around each pencil.
+**Ms. Garcia** has 4 new pencils for her reading group. Each pencil is 7.5 inches long. 
+She plans to use BIC Wite-Out strips (6.5" × 3/16") to cover them. Each pencil needs 8 strips around its circumference.
 
-**Question:** How much correction tape area is needed to cover all 4 pencils?
+**Question:** How many total BIC strips does she need for all 4 pencils?
 """)
 
 problem1_answer = st.text_area(
     "Show your work:",
     height=100,
     key="problem1",
-    placeholder="Step 1: Find the area for 1 pencil\nStep 2: Multiply by 4 pencils\nStep 3: Write your answer"
+    placeholder="Step 1: Calculate strips along length for 1 pencil\nStep 2: Calculate total strips for 1 pencil\nStep 3: Multiply by 4 pencils"
 )
 
 st.markdown("#### 🎨 **Problem 2: Art Supply**")
 st.markdown("""
-**Tommy** is decorating a pencil for an art project. His pencil is 7 inches long, and he uses tape that is 3/16 inch wide (0.1875 inches). 
-He estimates it will take 5 strips to go around his pencil.
+**Tommy** is covering a 6-inch pencil with BIC Wite-Out strips. 
+It takes 6 strips to go around the circumference of his pencil.
 
-**Question:** What is the surface area Tommy will cover with tape?
+**Question:** What is the total surface area Tommy will cover?
 """)
 
 problem2_answer = st.text_area(
     "Show your calculation:",
     height=100,
     key="problem2",
-    placeholder="Use the formula: Length × Width × Number of strips = ?"
+    placeholder="Step 1: How many strips along the length?\nStep 2: Total strips needed?\nStep 3: Total surface area?"
 )
 
-st.markdown("#### 🏫 **Problem 3: Pencil Comparison**")
+st.markdown("#### 🏫 **Problem 3: Strip Efficiency**")
 st.markdown("""
-**Sarah** has a short pencil that is 5 inches long. **Alex** has a long pencil that is 10 inches long. 
-Both pencils need 6 strips of 3/16-inch wide tape (0.1875 inches) to be covered.
+**Sarah** has a 4-inch pencil and **Alex** has a 9-inch pencil. 
+Both pencils need 7 strips around their circumference.
 
-**Question:** How much more tape area does Alex need than Sarah?
+**Question:** How many more BIC strips does Alex need than Sarah?
 """)
 
 problem3_answer = st.text_area(
     "Find the difference:",
     height=100,
     key="problem3",
-    placeholder="Sarah's pencil area = ?\nAlex's pencil area = ?\nDifference = ?"
+    placeholder="Sarah's total strips = ?\nAlex's total strips = ?\nDifference = ?"
 )
 
 st.session_state.responses.update({
@@ -689,19 +544,19 @@ st.session_state.responses.update({
 with st.expander("💡 Need help? Click for hints"):
     hint_col1, hint_col2, hint_col3 = st.columns(3)
     with hint_col1:
-        st.markdown("**Problem 1:**\n8 × 0.1875 × 6 = 9 \nThen × 4 pencils = 36 sq in")
+        st.markdown("**Problem 1:**\nStrips along length: 7.5 ÷ 6.5 ≈ 2 strips\nTotal per pencil: 2 × 8 = 16\nAll 4 pencils: 16 × 4 = 64 strips")
     with hint_col2:
-        st.markdown("**Problem 2:**\n7 × 0.1875 × 5 = 6.5625 sq in")
+        st.markdown("**Problem 2:**\nStrips along length: 6 ÷ 6.5 ≈ 1 strip\nTotal strips: 1 × 6 = 6\nArea: 6 × 1.2188 = 7.31 sq in")
     with hint_col3:
-        st.markdown("**Problem 3:**\nSarah: 5 × 0.1875 × 6 = 5.625\nAlex: 10 × 0.1875 × 6 = 11.25\nDiff: 5.625 sq in")
+        st.markdown("**Problem 3:**\nSarah: 1 × 7 = 7 strips\nAlex: 2 × 7 = 14 strips\nDifference: 14 - 7 = 7 strips")
 
 # Reflection Questions
 st.markdown("---")
 st.markdown("### 💭 Reflection Questions")
 
-reflection1 = st.text_area("1. What surprised you most about measuring your pencil?")
-reflection2 = st.text_area("2. Why might estimation be a useful skill in real life?")
-reflection3 = st.text_area("3. Which measurement (inches or centimeters) felt more natural to you? Why?")
+reflection1 = st.text_area("1. How did working with specific BIC strip dimensions (6.5\" × 3/16\") help you understand surface area?")
+reflection2 = st.text_area("2. Why might estimation be a useful skill when planning how many supplies you need?")
+reflection3 = st.text_area("3. Which was easier to visualize: the strips along the length or around the circumference? Why?")
 
 st.session_state.responses.update({
     "Reflection_1": reflection1,
@@ -722,9 +577,15 @@ if st.button("✅ Submit My Work", type="primary"):
         with summary_col1:
             st.metric("Estimate", f"{estimation} strips")
         with summary_col2:
-            st.metric("Actual", f"{actual_strips} strips")
+            if 'Total_Calculated_Strips' in st.session_state.responses:
+                st.metric("Calculated", f"{st.session_state.responses['Total_Calculated_Strips']} strips")
+            else:
+                st.metric("Calculated", "Not completed")
         with summary_col3:
-            st.metric("Difference", f"{difference} strips")
+            if 'Total_Surface_Area' in st.session_state.responses:
+                st.metric("Surface Area", f"{st.session_state.responses['Total_Surface_Area']:.2f} sq in")
+            else:
+                st.metric("Surface Area", "Not calculated")
     else:
         st.error("Please fill in your name and date before submitting!")
 
@@ -745,8 +606,8 @@ if teacher_password == "mathcraft2025":  # You can change this password
                 avg_estimate = df['Estimate'].mean() if 'Estimate' in df.columns else 0
                 st.metric("Average Estimate", f"{avg_estimate:.1f}")
             with col2:
-                avg_actual = df['Actual_Strips'].mean() if 'Actual_Strips' in df.columns else 0
-                st.metric("Average Actual", f"{avg_actual:.1f}")
+                avg_calculated = df['Total_Calculated_Strips'].mean() if 'Total_Calculated_Strips' in df.columns else 0
+                st.metric("Average Calculated", f"{avg_calculated:.1f}")
             with col3:
                 completion_rate = (df['Name'].notna().sum() / len(df)) * 100
                 st.metric("Completion Rate", f"{completion_rate:.0f}%")
