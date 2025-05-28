@@ -74,7 +74,7 @@ st.session_state.responses.update({"Name": name, "Date": date})
 st.markdown("---")
 st.markdown("""
 ### 🧠 Learning Objective
-Use estimation, measurement tools, and mathematical reasoning to explore **area and measurement** with a pencil and white correction tape.
+Use estimation, measurement tools, and mathematical reasoning to explore **surface area** by covering a pencil with white correction tape strips.
 
 ### 📦 Materials Needed
 - 📝 **Wood pencil** (standard #2 pencil)
@@ -275,7 +275,7 @@ Each strip has TWO measurements:
 When we calculate the surface area of your pencil, we'll use:
 - **Length**: How long your pencil is (you'll measure this)
 - **Strip width**: 3/16 inch (0.1875 inches) - how wide each strip is
-- **Number of strips**: How many strips go around the pencil
+- **Number of strips**: How many strips go around the pencil to cover its entire length
 
 **Area = Pencil length × Strip width × Number of strips around**
 **Area = Pencil length × 0.1875 × Number of strips around**
@@ -284,26 +284,45 @@ When we calculate the surface area of your pencil, we'll use:
 # Step 1: Estimation
 st.markdown("---")
 st.markdown("### 📏 Step 1: Make Your Estimate")
-st.markdown("Look at your pencil. How many strips of white correction tape do you think it will take to cover the entire length?")
+st.markdown("Look at your pencil. How many strips of white correction tape do you think it will take to completely cover the entire pencil surface? (Think of wrapping the strips around the pencil like rings)")
 
 estimation = st.slider(
-    "My Estimate (number of strips):", 
+    "My Estimate (number of strips to cover entire pencil):", 
     min_value=1, 
-    max_value=10, 
-    value=4,
+    max_value=15, 
+    value=8,
     help="Move the slider to make your best guess!"
 )
 
-# Visual representation of estimate
-fig1, ax1 = plt.subplots(figsize=(6, 3))
-for i in range(10):
-    color = "gold" if i < estimation else "lightgray"
-    ax1.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
-    ax1.text(i + 0.4, 0.5, str(i + 1), ha='center', va='center', fontweight='bold')
+# Visual representation of estimate with pencil coverage
+fig1, ax1 = plt.subplots(figsize=(12, 4))
 
-ax1.set_xlim(0, 10)
-ax1.set_ylim(0, 1)
-ax1.set_title(f"Your Estimate: {estimation} strips")
+# Draw pencil outline
+pencil_length = 10
+pencil_radius = 0.5
+pencil = plt.Rectangle((0, -pencil_radius), pencil_length, 2*pencil_radius, 
+                      facecolor='#DEB887', edgecolor='black', linewidth=2)
+ax1.add_patch(pencil)
+
+# Add pencil tip
+tip = plt.Polygon([(pencil_length, 0), (pencil_length + 1, 0.2), (pencil_length + 1, -0.2)], 
+                 facecolor='#8B4513', edgecolor='black')
+ax1.add_patch(tip)
+
+# Show estimated tape strips covering the pencil
+strip_width = pencil_length / 15  # Divide pencil into potential strips
+for i in range(15):
+    color = "white" if i < estimation else "lightgray"
+    alpha = 0.8 if i < estimation else 0.3
+    strip = plt.Rectangle((i * strip_width, -pencil_radius), strip_width, 2*pencil_radius, 
+                         facecolor=color, edgecolor='black', alpha=alpha, linewidth=1)
+    ax1.add_patch(strip)
+
+ax1.set_xlim(-0.5, pencil_length + 1.5)
+ax1.set_ylim(-1, 1)
+ax1.set_title(f"Your Estimate: {estimation} strips to cover the entire pencil", fontsize=14, fontweight='bold')
+ax1.text(pencil_length/2, -1.5, "Each white strip wraps around the pencil like a ring", 
+         ha='center', va='top', fontsize=12, style='italic')
 ax1.axis('off')
 st.pyplot(fig1)
 
@@ -314,7 +333,7 @@ st.markdown("### 🧠 Analytical Thinking: Reasoning About Estimates")
 st.markdown("Think about your estimation process:")
 st.markdown("""
 - Why is **zero** not a valid option?
-- Is **10** a good maximum estimate? Why or why not?
+- Is **15** a good maximum estimate? Why or why not?
 - Why might it be unhelpful to allow higher numbers?
 - What would your maximum estimate be?
 - How did you decide that number?
@@ -329,37 +348,59 @@ estimation_reasoning = st.text_area(
 
 st.session_state.responses["Estimation_Reasoning"] = estimation_reasoning
 
-# Step 2: Actual Measurement
+# Step 2: Actual Measurement - CORRECTED VERSION
 st.markdown("---")
-st.markdown("### 📐 Step 2: Measure with Real Tape")
-st.markdown("Now use white correction tape to actually measure your pencil. Count how many strips it takes!")
+st.markdown("### 📐 Step 2: Cover Your Pencil with Real Tape")
+st.markdown("""
+**Now use white correction tape to actually cover your pencil!**
+
+**Instructions:**
+1. Start at one end of your pencil
+2. Wrap strips of correction tape around your pencil like rings or bands
+3. Each strip should go all the way around the pencil's circumference
+4. Continue wrapping strips until the entire pencil length is covered
+5. Count how many strips it took to cover the whole pencil
+
+**Important:** Each strip wraps AROUND the pencil (like a ring), not along its length!
+""")
 
 actual_strips = st.number_input(
-    "Actual number of strips used:", 
+    "Actual number of strips used to cover entire pencil:", 
     min_value=1, 
-    max_value=10, 
+    max_value=15, 
     value=1,
-    help="Count each strip of tape you used"
+    help="Count each strip of tape you wrapped around your pencil"
 )
 
-# Visual comparison
-fig2, (ax2, ax3) = plt.subplots(1, 2, figsize=(10, 3))
+# Visual comparison - CORRECTED
+fig2, (ax2, ax3) = plt.subplots(1, 2, figsize=(12, 4))
 
 # Estimate visualization
-for i in range(10):
+pencil = plt.Rectangle((0, -0.5), 10, 1, facecolor='#DEB887', edgecolor='black', linewidth=2)
+ax2.add_patch(pencil)
+strip_width = 10 / 15
+for i in range(15):
     color = "gold" if i < estimation else "lightgray"
-    ax2.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
-ax2.set_xlim(0, 10)
-ax2.set_ylim(0, 1)
+    alpha = 0.8 if i < estimation else 0.3
+    strip = plt.Rectangle((i * strip_width, -0.5), strip_width, 1, 
+                         facecolor=color, edgecolor='black', alpha=alpha, linewidth=1)
+    ax2.add_patch(strip)
+ax2.set_xlim(-0.5, 10.5)
+ax2.set_ylim(-1, 1)
 ax2.set_title(f"Estimate: {estimation} strips")
 ax2.axis('off')
 
 # Actual visualization
-for i in range(10):
+pencil2 = plt.Rectangle((0, -0.5), 10, 1, facecolor='#DEB887', edgecolor='black', linewidth=2)
+ax3.add_patch(pencil2)
+for i in range(15):
     color = "orange" if i < actual_strips else "lightgray"
-    ax3.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
-ax3.set_xlim(0, 10)
-ax3.set_ylim(0, 1)
+    alpha = 0.8 if i < actual_strips else 0.3
+    strip = plt.Rectangle((i * strip_width, -0.5), strip_width, 1, 
+                         facecolor=color, edgecolor='black', alpha=alpha, linewidth=1)
+    ax3.add_patch(strip)
+ax3.set_xlim(-0.5, 10.5)
+ax3.set_ylim(-1, 1)
 ax3.set_title(f"Actual: {actual_strips} strips")
 ax3.axis('off')
 
@@ -494,10 +535,10 @@ if inches > 0 and centimeters > 0:
 # Step 4: Cross Section Exploration
 st.markdown("---")
 st.markdown("### ⭕ Step 4: Explore the Pencil's Cross Section")
-st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. How many tape pieces would it take to go around?")
+st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. How many tape pieces would it take to go around the edge once?")
 
 circumference_estimate = st.slider(
-    "Estimate: white tape pieces around the circumference:",
+    "Estimate: white tape pieces to go around the circumference once:",
     min_value=1,
     max_value=8,
     value=6
@@ -536,8 +577,8 @@ st.markdown("### 📦 Step 5: Understanding Area")
 st.markdown("""
 If you could unwrap all the correction tape from your pencil and lay it flat, you'd get a rectangle!
 - **Length** = length of your pencil
-- **Width** = width of one tape strip
-- **Number of strips** = how many strips went around (from cross section)
+- **Width** = width of one tape strip (3/16 inch = 0.1875 inches)
+- **Number of strips** = how many strips went around to cover the pencil
 - **Total Area** = Length × Width × Number of strips around
 """)
 
@@ -556,18 +597,18 @@ with col2:
     calc_width = st.number_input(
         "Correction tape width (inches):", 
         min_value=0.0, 
-        step=0.1, 
-        value=0.2,
-        format="%.1f",
+        step=0.01, 
+        value=0.1875,
+        format="%.4f",
         key="calc_width",
-        help="White-out correction tape is typically about 0.2 inches wide"
+        help="BIC Wite-Out correction tape is 3/16 inch = 0.1875 inches wide"
     )
 with col3:
     calc_strips = st.number_input(
         "Number of strips around:", 
         min_value=1, 
-        max_value=12, 
-        value=circumference_estimate if circumference_estimate > 0 else 1,
+        max_value=15, 
+        value=actual_strips if actual_strips > 0 else 1,
         key="calc_strips"
     )
 
@@ -576,10 +617,10 @@ if calc_length > 0 and calc_width > 0 and calc_strips > 0:
     
     st.markdown("#### 📊 Your Calculation:")
     st.markdown(f"""
-    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.2f} square inches**
+    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.4f} square inches**
     """)
     
-    st.success(f"🎯 Total Surface Area: **{total_area:.2f} square inches**")
+    st.success(f"🎯 Total Surface Area: **{total_area:.4f} square inches**")
     
     st.session_state.responses.update({
         "Calculated_Area": total_area,
@@ -597,7 +638,7 @@ st.markdown("### 📝 Challenge Word Problems")
 st.markdown("#### 📚 **Problem 1: Classroom Pencils**")
 st.markdown("""
 **Ms. Garcia** has 4 new pencils for her reading group. Each pencil is 8 inches long. 
-She uses correction tape that is 0.2 inches wide, and it takes 6 strips of tape to go around each pencil.
+She uses correction tape that is 3/16 inch wide (0.1875 inches), and it takes 6 strips of tape to go around each pencil.
 
 **Question:** How much correction tape area is needed to cover all 4 pencils?
 """)
@@ -611,7 +652,7 @@ problem1_answer = st.text_area(
 
 st.markdown("#### 🎨 **Problem 2: Art Supply**")
 st.markdown("""
-**Tommy** is decorating a pencil for an art project. His pencil is 7 inches long, and he uses tape that is 0.5 inches wide. 
+**Tommy** is decorating a pencil for an art project. His pencil is 7 inches long, and he uses tape that is 3/16 inch wide (0.1875 inches). 
 He estimates it will take 5 strips to go around his pencil.
 
 **Question:** What is the surface area Tommy will cover with tape?
@@ -627,7 +668,7 @@ problem2_answer = st.text_area(
 st.markdown("#### 🏫 **Problem 3: Pencil Comparison**")
 st.markdown("""
 **Sarah** has a short pencil that is 5 inches long. **Alex** has a long pencil that is 10 inches long. 
-Both pencils need 6 strips of 0.2-inch wide tape to be covered.
+Both pencils need 6 strips of 3/16-inch wide tape (0.1875 inches) to be covered.
 
 **Question:** How much more tape area does Alex need than Sarah?
 """)
@@ -648,11 +689,11 @@ st.session_state.responses.update({
 with st.expander("💡 Need help? Click for hints"):
     hint_col1, hint_col2, hint_col3 = st.columns(3)
     with hint_col1:
-        st.markdown("**Problem 1:**\n8 × 0.2 × 6 = ? \nThen × 4 pencils")
+        st.markdown("**Problem 1:**\n8 × 0.1875 × 6 = 9 \nThen × 4 pencils = 36 sq in")
     with hint_col2:
-        st.markdown("**Problem 2:**\n7 × 0.5 × 5 = ?")
+        st.markdown("**Problem 2:**\n7 × 0.1875 × 5 = 6.5625 sq in")
     with hint_col3:
-        st.markdown("**Problem 3:**\nFind each area first, then subtract!")
+        st.markdown("**Problem 3:**\nSarah: 5 × 0.1875 × 6 = 5.625\nAlex: 10 × 0.1875 × 6 = 11.25\nDiff: 5.625 sq in")
 
 # Reflection Questions
 st.markdown("---")
