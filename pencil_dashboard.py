@@ -403,7 +403,7 @@ if inches > 0:
         "Total_Calculated_Strips": total_calculated_strips
     })
     
-    # Compare with estimate
+    # Compare with estimate - THE ESTIMATE VS ACTUAL SECTION
     st.markdown("### 🤔 How Did Your Estimate Compare?")
     difference = abs(estimation - total_calculated_strips)
     
@@ -412,6 +412,22 @@ if inches > 0:
     else:
         st.info(f"Your estimate was **{estimation}** strips, actual calculation is **{total_calculated_strips}** strips. Difference: **{difference}** strips.")
     
+    # ERROR RATIO TUTORIAL - Auto Calculator (KEEPING THIS!)
+    st.markdown("### 💡 Estimation Tutorial: Understanding Your Estimation Error")
+    st.markdown("Now let's analyze your **estimation** compared to the calculated number:")
+
+    st.markdown("""
+    **Step 1:** Find the **difference** between your **estimation** and the calculated value.
+
+    **Step 2:** Divide that difference by the calculated number of strips to get your **estimation error ratio**.
+
+    **Step 3:** Use this formula: 
+
+    `Estimation Error Ratio = |Estimation - Calculated| / Calculated`
+
+    This helps us understand how close your **estimation** was. Smaller ratios mean better **estimation** accuracy!
+    """)
+    
     # Error ratio calculation
     if total_calculated_strips > 0:
         error_ratio = round(difference / total_calculated_strips, 2)
@@ -419,29 +435,57 @@ if inches > 0:
         percent_accuracy = round(100 - percent_error, 1)
         over_under = "above" if estimation > total_calculated_strips else ("below" if estimation < total_calculated_strips else "exact")
         
-        st.markdown("#### 🧮 **Your Estimation Analysis**")
+        # Create auto-output calculator display
+        st.markdown("#### 🧮 **Your Estimation Error Calculator Results**")
         
+        # Step-by-step calculation display
         col1, col2 = st.columns([2, 1])
         
         with col1:
             st.markdown(f"""
-            **Estimation vs. Calculation:**
+            **Step 1 - Find the difference:**
             - Your **estimation**: **{estimation}** strips
             - Calculated result: **{total_calculated_strips}** strips  
-            - Difference: **{difference}** strips
-            - **Estimation Error Ratio**: {difference} ÷ {total_calculated_strips} = **{error_ratio}**
-            - **Estimation Accuracy**: **{percent_accuracy}%**
+            - Difference: |{estimation} - {total_calculated_strips}| = **{difference}** strips
+            
+            **Step 2 - Calculate estimation error ratio:**
+            - **Estimation Error Ratio** = {difference} ÷ {total_calculated_strips} = **{error_ratio}**
+            
+            **Step 3 - Convert to percentages:**
+            - **Estimation Error**: {difference} ÷ {total_calculated_strips} × 100 = **{percent_error}%**
+            - **Estimation Accuracy**: 100 - {percent_error} = **{percent_accuracy}%**
             """)
         
         with col2:
+            # Visual summary box
             st.markdown(f"""
             <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; text-align: center;">
-                <h4 style="margin: 0; color: white;">📊 Results</h4>
-                <p style="margin: 0.5rem 0;"><strong>Error Ratio: {error_ratio}</strong></p>
+                <h4 style="margin: 0; color: white;">📊 Your Estimation Results</h4>
+                <p style="margin: 0.5rem 0; font-size: 1.2rem;"><strong>Error Ratio: {error_ratio}</strong></p>
                 <p style="margin: 0.5rem 0;"><strong>Accuracy: {percent_accuracy}%</strong></p>
-                <p style="margin: 0.5rem 0;"><strong>Estimated {over_under}</strong></p>
+                <p style="margin: 0.5rem 0;"><strong>You estimated {over_under}</strong></p>
             </div>
             """, unsafe_allow_html=True)
+        
+        # Interpretation with feedback
+        st.markdown("#### 🎯 **What This Means for Your Estimation Skills:**")
+        
+        if over_under != "exact":
+            st.markdown(f"Your **estimation** was **{over_under}** the calculated amount by **{difference}** strips.")
+        else:
+            st.markdown("🌟 Your **estimation** was exact! Perfect **estimation** precision!")
+        
+        # Performance feedback
+        if error_ratio == 0:
+            st.success("🌟 **Perfect estimation!** Your estimation error ratio = 0 - You nailed it!")
+        elif error_ratio <= 0.2:
+            st.success(f"🎯 **Excellent estimation skills!** Your estimation error ratio = {error_ratio} (≤ 0.2 is great!)")
+        elif error_ratio <= 0.5:
+            st.info(f"👍 **Good estimation skills!** Your estimation error ratio = {error_ratio} (≤ 0.5 is solid work!)")
+        elif error_ratio <= 1.0:
+            st.warning(f"📈 **Keep practicing your estimation!** Your estimation error ratio = {error_ratio} - Estimation gets better with practice!")
+        else:
+            st.warning(f"🎯 **Estimation challenge!** Your estimation error ratio = {error_ratio} - This was a tough one to estimate!")
         
         # Store estimation analysis
         st.session_state.responses.update({
@@ -451,6 +495,18 @@ if inches > 0:
             "Estimation_Over_Under": over_under,
             "Estimation_Difference": difference
         })
+        
+        # Optional: Show the calculation breakdown
+        with st.expander("🔍 See the detailed estimation calculation breakdown"):
+            st.markdown(f"""
+            **Mathematical Breakdown of Your Estimation:**
+            
+            1. **Absolute Difference**: |{estimation} - {total_calculated_strips}| = {difference}
+            2. **Estimation Error Ratio**: {difference} ÷ {total_calculated_strips} = {difference/total_calculated_strips:.4f} ≈ {error_ratio}
+            3. **Estimation Percent Error**: ({difference} ÷ {total_calculated_strips}) × 100 = {(difference/total_calculated_strips)*100:.1f}%
+            4. **Estimation Percent Accuracy**: 100% - {percent_error}% = {percent_accuracy}%
+            5. **Estimation Direction**: {estimation} {">" if estimation > total_calculated_strips else ("<" if estimation < total_calculated_strips else "=")} {total_calculated_strips}, so you estimated {"above" if estimation > total_calculated_strips else ("below" if estimation < total_calculated_strips else "exactly")}
+            """)
 
 else:
     st.info("Enter your pencil length in Step 2 to see the calculations!")
