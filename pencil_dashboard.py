@@ -8,49 +8,51 @@ import pandas as pd
 
 # Page configuration
 st.set_page_config(
-    page_title="MathCraft | 4th Grade Area & Measurement", 
+    page_title="Cognitive Cloud | 4th Grade Area & Measurement", 
     layout="centered",
-    page_icon="🧮"
+    page_icon="🧠"
 )
 
-# Header with logo-style branding
+# Header with new branding
 st.markdown("""
-<div style="text-align: center; padding: 1rem; background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); border-radius: 10px; margin-bottom: 2rem;">
-    <h2 style="color: white; margin: 0; font-weight: bold;">🧮 MathCraft</h2>
-    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Hands-On Mathematical Thinking</p>
-    <p style="color: #e0e0e0; margin: 0; font-size: 0.8rem; margin-top: 0.5rem;">© All Rights Reserved - Xavier Honablue M.Ed</p>
+<div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #2E4A6B 0%, #4A9B8E 50%, #F4A261 100%); border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+    <h2 style="color: white; margin: 0; font-weight: bold; font-size: 2.2rem;">🧠 Cognitive Cloud</h2>
+    <p style="color: #f0f0f0; margin: 0.5rem 0; font-style: italic; font-size: 1.1rem;">Think Beyond. Learn Without Limits.</p>
+    <p style="color: #e0e0e0; margin: 0; font-size: 0.85rem; opacity: 0.9;">Adaptive Learning Experience | © Xavier Honablue M.Ed</p>
 </div>
 """, unsafe_allow_html=True)
 
-st.title("📐 4th Grade Math: Area and Measurement with a Pencil")
+st.title("📐 Adaptive Mathematics: Area and Measurement Discovery")
 
 # Michigan Learning Standards
 st.markdown("---")
-st.markdown("### 📚 Michigan Learning Standards Addressed")
-with st.expander("Click to view aligned standards"):
+st.markdown("### 📚 Learning Standards & Cognitive Pathways")
+with st.expander("🎯 View aligned standards and adaptive learning objectives"):
     st.markdown("""
+    **Michigan Learning Standards Addressed:**
+    
     **4.MD.1** - Know relative sizes of measurement units within one system of units including km, m, cm; kg, g; lb, oz.; l, ml; hr, min, sec. Within a single system of measurement, express measurements in a larger unit in terms of a smaller unit.
-    *Applied through: Converting between inches and centimeters, understanding fractions of an inch (3/16), decimal conversions*
+    *Cognitive Pathway: Converting between inches and centimeters, understanding fractions of an inch (3/16), decimal conversions*
     
     **4.MD.2** - Use the four operations to solve word problems involving distances, intervals of time, liquid volumes, masses of objects, and money, including problems involving simple fractions or decimals.
-    *Applied through: Multi-step word problems using surface area calculations, working with fractions (3/16 inch), estimation error calculations*
+    *Cognitive Pathway: Multi-step word problems using surface area calculations, working with fractions (3/16 inch), estimation error calculations*
     
     **4.MD.3** - Apply the area and perimeter formulas for rectangles in real world and mathematical problems.
-    *Applied through: Surface area formula (Length × Width × Number of strips), calculating area of tape strips, real-world application to pencil covering*
+    *Cognitive Pathway: Surface area formula (Length × Width × Number of strips), calculating area of tape strips, real-world application to pencil covering*
     
     **4.OA.3** - Solve multistep word problems posed with whole numbers and having whole-number answers using the four operations, including problems in which remainders must be interpreted.
-    *Applied through: Estimation vs. actual comparisons, error ratio calculations, multi-step area problems*
+    *Cognitive Pathway: Estimation vs. actual comparisons, error ratio calculations, multi-step area problems*
     
     **4.NF.6** - Use decimal notation for fractions with denominators 10 or 100.
-    *Applied through: Converting 3/16 to decimal form (0.1875), understanding decimal representations*
+    *Cognitive Pathway: Converting 3/16 to decimal form (0.1875), understanding decimal representations*
     
-    **Mathematical Practices:**
-    - **MP.1** - Make sense of problems and persevere in solving them
-    - **MP.2** - Reason abstractly and quantitatively *(error ratios, percent calculations)*
-    - **MP.3** - Construct viable arguments and critique reasoning *(analytical thinking about estimates)*
-    - **MP.4** - Model with mathematics *(surface area formula, real-world applications)*
-    - **MP.5** - Use appropriate tools strategically *(rulers, fraction visualization, correction tape)*
-    - **MP.6** - Attend to precision *(fraction measurements, decimal accuracy)*
+    **Cognitive Learning Practices:**
+    - **Adaptive Reasoning** - Make sense of problems and develop personalized solution strategies
+    - **Pattern Recognition** - Reason abstractly and quantitatively *(error ratios, percent calculations)*
+    - **Critical Analysis** - Construct viable arguments and evaluate reasoning *(analytical thinking about estimates)*
+    - **Mathematical Modeling** - Connect mathematics to real-world applications *(surface area formula, practical applications)*
+    - **Strategic Thinking** - Use appropriate tools and methods strategically *(rulers, fraction visualization, correction tape)*
+    - **Precision & Accuracy** - Attend to mathematical precision *(fraction measurements, decimal accuracy)*
     """)
 st.markdown("---")
 
@@ -61,7 +63,7 @@ if "all_responses" not in st.session_state:
     st.session_state.all_responses = []
 
 # Student Information Section
-st.markdown("### 👨‍🎓 Student Information")
+st.markdown("### 👨‍🎓 Learner Profile")
 col1, col2 = st.columns(2)
 with col1:
     name = st.text_input("Name:", key="student_name")
@@ -70,123 +72,130 @@ with col2:
 
 st.session_state.responses.update({"Name": name, "Date": date})
 
-# Learning Objective
+# Learning Objective with Cognitive Cloud approach
 st.markdown("---")
 st.markdown("""
-### 🧠 Learning Objective
-Use estimation, measurement tools, and mathematical reasoning to explore **area and measurement** with a pencil and white correction tape.
+### 🧠 Adaptive Learning Objective
+Discover **area and measurement** concepts through hands-on exploration, adaptive reasoning, and personalized problem-solving using everyday materials.
 
-### 📦 Materials Needed
+**Cognitive Cloud adapts to your thinking patterns as you:**
+- Develop estimation strategies that match your reasoning style
+- Build spatial understanding through multiple measurement approaches
+- Connect abstract mathematical concepts to tangible experiences
+
+### 📦 Learning Materials
 - 📝 **Wood pencil** (standard #2 pencil)
 - ⚪ **BIC Wite-Out EZ Correct** correction tape dispenser
 - 📏 **Ruler** (with both inches and centimeters)
 """)
 
-# Area Formula Introduction
+# Area Formula Introduction with Cognitive Cloud styling
 st.markdown("---")
-st.markdown("### 🌟 **KEY FORMULA FOR THIS LESSON**")
+st.markdown("### 🌟 **FOUNDATIONAL CONCEPT FOR THIS DISCOVERY**")
 st.markdown("""
-<div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; margin: 1rem 0;">
-    <h3 style="color: white; margin: 0; font-size: 1.5rem;">Surface Area Formula</h3>
-    <h2 style="color: white; margin: 0.5rem 0; font-family: monospace; font-size: 2rem;">Area = Length × Width × Strips</h2>
-    <p style="color: #f0f0f0; margin: 0; font-style: italic;">Length of pencil × Width of tape × Number of strips around</p>
+<div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #2E4A6B 0%, #4A9B8E 100%); border-radius: 20px; margin: 1rem 0; box-shadow: 0 6px 20px rgba(0,0,0,0.15);">
+    <h3 style="color: white; margin: 0; font-size: 1.6rem;">Surface Area Discovery Formula</h3>
+    <h2 style="color: #F4A261; margin: 1rem 0; font-family: monospace; font-size: 2.2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Area = Length × Width × Strips</h2>
+    <p style="color: #f0f0f0; margin: 0; font-style: italic; font-size: 1.1rem;">Length of pencil × Width of tape × Number of strips around</p>
+    <p style="color: #e0e0e0; margin: 0.5rem 0; font-size: 0.9rem;">🧠 Cognitive Cloud adapts this formula to your learning style</p>
 </div>
 """, unsafe_allow_html=True)
 
-# Plan view of tape strip with dimensions
-st.markdown("### 📋 Meet Your BIC Wite-Out EZ Correct Strip")
-st.markdown("**This is what ONE strip of your correction tape looks like from above (Plan View):**")
+# Plan view of tape strip with enhanced visualization
+st.markdown("### 📋 Understanding Your BIC Wite-Out EZ Correct Strip")
+st.markdown("**Cognitive Cloud Visual Learning: Examining ONE strip from above (Plan View):**")
 
-fig_tape, ax_tape = plt.subplots(figsize=(10, 4))
+fig_tape, ax_tape = plt.subplots(figsize=(12, 5))
 
 tape_length = 6.5
 tape_width = 3/16
-scale_factor = 15  # Make it bigger for visibility
+scale_factor = 20  # Enhanced for better visibility
 
 rect = plt.Rectangle((0, 0), tape_length, tape_width * scale_factor, 
-                    facecolor='white', edgecolor='black', linewidth=3)
+                    facecolor='white', edgecolor='#2E4A6B', linewidth=4)
 ax_tape.add_patch(rect)
 
-# Add dimensions with better arrows
-ax_tape.annotate('', xy=(0, -0.4), xytext=(tape_length, -0.4),
-                arrowprops=dict(arrowstyle='<->', color='blue', lw=3))
-ax_tape.text(tape_length/2, -0.7, f'{tape_length}" long', 
-            ha='center', va='top', fontsize=14, color='blue', fontweight='bold')
+# Enhanced dimensions with Cognitive Cloud colors
+ax_tape.annotate('', xy=(0, -0.5), xytext=(tape_length, -0.5),
+                arrowprops=dict(arrowstyle='<->', color='#4A9B8E', lw=4))
+ax_tape.text(tape_length/2, -0.8, f'{tape_length}" long', 
+            ha='center', va='top', fontsize=16, color='#4A9B8E', fontweight='bold')
 
-ax_tape.annotate('', xy=(-0.5, 0), xytext=(-0.5, tape_width * scale_factor),
-                arrowprops=dict(arrowstyle='<->', color='red', lw=3))
-ax_tape.text(-0.8, (tape_width * scale_factor)/2, f'3/16" wide', 
-            ha='center', va='center', fontsize=12, color='red', fontweight='bold', rotation=90)
+ax_tape.annotate('', xy=(-0.6, 0), xytext=(-0.6, tape_width * scale_factor),
+                arrowprops=dict(arrowstyle='<->', color='#F4A261', lw=4))
+ax_tape.text(-0.9, (tape_width * scale_factor)/2, f'3/16" wide', 
+            ha='center', va='center', fontsize=14, color='#F4A261', fontweight='bold', rotation=90)
 
-# Add area calculation
+# Enhanced area calculation with cognitive emphasis
 ax_tape.text(tape_length/2, (tape_width * scale_factor)/2, 
             f'Area = {tape_length}" × 3/16" = {tape_length * (3/16):.4f} square inches', 
-            ha='center', va='center', fontsize=12, fontweight='bold', 
-            bbox=dict(boxstyle="round,pad=0.3", facecolor="yellow", alpha=0.8))
+            ha='center', va='center', fontsize=14, fontweight='bold', 
+            bbox=dict(boxstyle="round,pad=0.5", facecolor="#F4A261", alpha=0.9, edgecolor="#2E4A6B"))
 
-ax_tape.set_xlim(-1.2, tape_length + 0.5)
-ax_tape.set_ylim(-1, tape_width * scale_factor + 0.5)
+ax_tape.set_xlim(-1.5, tape_length + 0.7)
+ax_tape.set_ylim(-1.2, tape_width * scale_factor + 0.7)
 ax_tape.set_aspect('equal')
-ax_tape.set_title('📋 Plan View: ONE BIC Wite-Out EZ Correct Strip\n(Actual dimensions)', 
-                 fontsize=16, fontweight='bold', pad=20)
+ax_tape.set_title('🧠 Cognitive Cloud Visualization: ONE BIC Wite-Out EZ Correct Strip\n(Actual dimensions for adaptive learning)', 
+                 fontsize=18, fontweight='bold', pad=25, color='#2E4A6B')
 ax_tape.axis('off')
 
 st.pyplot(fig_tape)
 
 st.markdown("""
-**Why these measurements matter:**
+**Why these measurements enhance your cognitive understanding:**
 - **Length: 6.5 inches** - This is how long each strip is when you pull it from the dispenser
-- **Width: 3/16 inch** - This is how wide the tape is (we'll learn about this fraction below!)
+- **Width: 3/16 inch** - This is how wide the tape is (we'll explore this fraction cognitively!)
 - **Area of ONE strip: 1.2188 square inches** - This is the area each strip covers
 
-📐 **Plan View** means looking down from directly above, showing length and width. Later we'll see a **cross-section** view!
+🧠 **Cognitive Learning Note:** Plan View means looking down from directly above, showing length and width. This spatial reasoning skill transfers to many mathematical concepts!
 """)
 
-# Interactive Fraction Tutorial - NOW CONNECTED TO TAPE WIDTH
+# Enhanced Interactive Fraction Tutorial
 st.markdown("---")
-st.markdown("### 📏 Understanding 3/16 Inch (Your Tape Width!)")
-st.markdown("**Your BIC Wite-Out tape is 3/16 inch wide. Let's understand what that means!**")
+st.markdown("### 📏 Cognitive Discovery: Understanding 3/16 Inch (Your Tape Width!)")
+st.markdown("**Your BIC Wite-Out tape is 3/16 inch wide. Cognitive Cloud adapts to help you understand fractions through multiple pathways!**")
 
-# Create ruler showing sixteenths
-fig_ruler, ax_ruler = plt.subplots(figsize=(10, 4))
-ruler_length = 1  # Show just 1 inch for clarity
-ax_ruler.add_patch(plt.Rectangle((0, 0), ruler_length, 0.5, facecolor='lightgray', edgecolor='black'))
+# Create enhanced ruler showing sixteenths
+fig_ruler, ax_ruler = plt.subplots(figsize=(12, 5))
+ruler_length = 1
+ax_ruler.add_patch(plt.Rectangle((0, 0), ruler_length, 0.6, facecolor='#F8F9FA', edgecolor='#2E4A6B', linewidth=2))
 
-# Add inch marks
+# Add inch marks with Cognitive Cloud styling
 for i in range(2):
-    ax_ruler.plot([i, i], [0, 0.5], 'k-', linewidth=3)
-    ax_ruler.text(i, -0.1, f'{i}"', ha='center', va='top', fontweight='bold', fontsize=12)
+    ax_ruler.plot([i, i], [0, 0.6], color='#2E4A6B', linewidth=4)
+    ax_ruler.text(i, -0.15, f'{i}"', ha='center', va='top', fontweight='bold', fontsize=14, color='#2E4A6B')
 
-# Add sixteenth marks with special highlighting for 3/16
+# Enhanced sixteenth marks with special highlighting for 3/16
 for i in range(ruler_length * 16 + 1):
     x = i / 16
     if i % 16 == 0:
         continue
     elif i % 8 == 0:
-        ax_ruler.plot([x, x], [0, 0.4], 'k-', linewidth=2)
+        ax_ruler.plot([x, x], [0, 0.5], color='#4A9B8E', linewidth=3)
     elif i % 4 == 0:
-        ax_ruler.plot([x, x], [0, 0.35], 'k-', linewidth=1.5)
+        ax_ruler.plot([x, x], [0, 0.4], color='#4A9B8E', linewidth=2)
     elif i % 2 == 0:
-        ax_ruler.plot([x, x], [0, 0.25], 'k-', linewidth=1)
+        ax_ruler.plot([x, x], [0, 0.3], 'k-', linewidth=1.5)
     else:
-        ax_ruler.plot([x, x], [0, 0.15], 'k-', linewidth=0.5)
+        ax_ruler.plot([x, x], [0, 0.2], 'k-', linewidth=1)
 
-# Highlight 3/16 specifically
+# Enhanced highlight for 3/16
 tape_width_pos = 3/16
-ax_ruler.plot([tape_width_pos, tape_width_pos], [0, 0.5], 'r-', linewidth=4)
-ax_ruler.text(tape_width_pos, 0.7, '3/16"\n(Your tape width!)', ha='center', va='bottom', 
-             fontweight='bold', color='red', fontsize=12,
-             bbox=dict(boxstyle="round,pad=0.3", facecolor="yellow", alpha=0.8))
+ax_ruler.plot([tape_width_pos, tape_width_pos], [0, 0.6], color='#F4A261', linewidth=6)
+ax_ruler.text(tape_width_pos, 0.85, '3/16"\n(Your tape width!)', ha='center', va='bottom', 
+             fontweight='bold', color='#F4A261', fontsize=14,
+             bbox=dict(boxstyle="round,pad=0.4", facecolor="#F4A261", alpha=0.2, edgecolor="#F4A261"))
 
-ax_ruler.set_xlim(-0.1, 1.1)
-ax_ruler.set_ylim(-0.3, 1.0)
-ax_ruler.set_title('Ruler Showing Your Tape Width: 3/16 Inch', fontsize=14, fontweight='bold')
+ax_ruler.set_xlim(-0.15, 1.15)
+ax_ruler.set_ylim(-0.3, 1.1)
+ax_ruler.set_title('🧠 Cognitive Cloud Ruler: Understanding Your Tape Width (3/16 Inch)', 
+                  fontsize=16, fontweight='bold', color='#2E4A6B')
 ax_ruler.axis('off')
 st.pyplot(fig_ruler)
 
-# Interactive fraction calculator - focused on understanding 3/16
-st.markdown("#### 🧮 Fraction Calculator: Explore Different Sixteenths")
-st.markdown("**Try different fractions to see how 3/16 compares to other measurements:**")
+# Enhanced Interactive fraction calculator
+st.markdown("#### 🧮 Adaptive Fraction Explorer: Discover Different Sixteenths")
+st.markdown("**Cognitive Cloud adapts: Try different fractions to see how 3/16 compares to other measurements:**")
 
 col1, col2 = st.columns(2)
 
@@ -205,279 +214,301 @@ with col2:
 decimal_result = numerator / 16
 st.markdown(f"**Decimal equivalent:** {numerator}/16 = {decimal_result:.4f} inches")
 
-# Special callout when 3/16 is selected
+# Enhanced feedback with Cognitive Cloud approach
 if numerator == 3:
-    st.success(f"🎯 **Perfect! This is your tape width: 3/16 = {decimal_result:.4f} inches**")
+    st.success(f"🧠 **Cognitive Cloud Recognition!** This is your tape width: 3/16 = {decimal_result:.4f} inches")
 else:
-    st.info(f"Compare this to your tape width: 3/16 = {3/16:.4f} inches")
+    st.info(f"🧠 Cognitive Cloud Comparison: This measures {decimal_result:.4f} inches vs. your tape width of {3/16:.4f} inches")
 
-# Visual representation focused on the selected fraction
-fig_frac, (ax_whole, ax_zoom) = plt.subplots(1, 2, figsize=(12, 3))
+# Enhanced visual representation
+fig_frac, (ax_whole, ax_zoom) = plt.subplots(1, 2, figsize=(14, 4))
 
-# Show whole inch divided into 16 parts
-ax_whole.add_patch(plt.Rectangle((0, 0), 1, 0.5, facecolor='lightblue', edgecolor='black'))
+# Enhanced whole inch visualization
+ax_whole.add_patch(plt.Rectangle((0, 0), 1, 0.6, facecolor='#F8F9FA', edgecolor='#2E4A6B', linewidth=2))
 for i in range(17):
     x = i / 16
-    ax_whole.plot([x, x], [0, 0.5], 'k-', linewidth=0.5)
+    ax_whole.plot([x, x], [0, 0.6], color='#2E4A6B', linewidth=1)
 
-# Highlight the selected fraction
+# Enhanced highlighting with Cognitive Cloud colors
 for i in range(numerator):
     x1 = i / 16
     x2 = (i + 1) / 16
-    ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.5, facecolor='red', alpha=0.7))
+    ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.6, facecolor='#4A9B8E', alpha=0.8))
 
-# Always show where 3/16 is for comparison
+# Always show where 3/16 is for cognitive comparison
 if numerator != 3:
     for i in range(3):
         x1 = i / 16
         x2 = (i + 1) / 16
-        ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.5, facecolor='yellow', alpha=0.5))
-    ax_whole.text(3/32, 0.6, 'Tape width\n(3/16)', ha='center', va='bottom', fontsize=8, color='orange')
+        ax_whole.add_patch(plt.Rectangle((x1, 0), x2 - x1, 0.6, facecolor='#F4A261', alpha=0.6))
+    ax_whole.text(3/32, 0.75, 'Tape width\n(3/16)', ha='center', va='bottom', fontsize=10, 
+                 color='#F4A261', fontweight='bold')
 
 ax_whole.set_xlim(-0.05, 1.05)
-ax_whole.set_ylim(-0.1, 0.8)
-ax_whole.set_title(f'One Inch Showing {numerator}/16', fontweight='bold')
-ax_whole.text(0.5, -0.05, '1 inch = 16/16', ha='center', va='top', fontsize=10)
+ax_whole.set_ylim(-0.15, 0.9)
+ax_whole.set_title(f'🧠 Cognitive View: One Inch Showing {numerator}/16', fontweight='bold', color='#2E4A6B')
+ax_whole.text(0.5, -0.08, '1 inch = 16/16', ha='center', va='top', fontsize=12, color='#2E4A6B')
 ax_whole.axis('off')
 
-# Zoomed view
+# Enhanced zoomed view
 zoom_start = max(0, (numerator - 2) / 16)
 zoom_end = min(1, (numerator + 2) / 16)
-ax_zoom.add_patch(plt.Rectangle((zoom_start, 0), zoom_end - zoom_start, 0.5, facecolor='lightblue', edgecolor='black'))
+ax_zoom.add_patch(plt.Rectangle((zoom_start, 0), zoom_end - zoom_start, 0.6, 
+                               facecolor='#F8F9FA', edgecolor='#2E4A6B', linewidth=2))
 
 for i in range(int(zoom_start * 16), int(zoom_end * 16) + 1):
     x = i / 16
     if zoom_start <= x <= zoom_end:
-        ax_zoom.plot([x, x], [0, 0.5], 'k-', linewidth=1)
+        ax_zoom.plot([x, x], [0, 0.6], color='#2E4A6B', linewidth=2)
         if i == numerator:
-            ax_zoom.plot([x, x], [0, 0.5], 'r-', linewidth=3)
-            ax_zoom.text(x, 0.6, f'{i}/16', ha='center', va='bottom', fontweight='bold', color='red')
+            ax_zoom.plot([x, x], [0, 0.6], color='#4A9B8E', linewidth=5)
+            ax_zoom.text(x, 0.75, f'{i}/16', ha='center', va='bottom', fontweight='bold', 
+                        color='#4A9B8E', fontsize=12)
         elif i == 3:  # Always mark the tape width
-            ax_zoom.plot([x, x], [0, 0.5], 'orange', linewidth=2)
-            ax_zoom.text(x, -0.1, 'Tape', ha='center', va='top', fontsize=8, color='orange')
+            ax_zoom.plot([x, x], [0, 0.6], color='#F4A261', linewidth=3)
+            ax_zoom.text(x, -0.1, 'Tape', ha='center', va='top', fontsize=10, 
+                        color='#F4A261', fontweight='bold')
 
 ax_zoom.set_xlim(zoom_start - 0.02, zoom_end + 0.02)
-ax_zoom.set_ylim(-0.2, 0.8)
-ax_zoom.set_title(f'Zoomed View: {numerator}/16 = {decimal_result:.4f}"', fontweight='bold')
+ax_zoom.set_ylim(-0.2, 0.9)
+ax_zoom.set_title(f'🔍 Adaptive Focus: {numerator}/16 = {decimal_result:.4f}"', 
+                 fontweight='bold', color='#2E4A6B')
 ax_zoom.axis('off')
 
 st.pyplot(fig_frac)
 
 st.markdown("""
-### 🔗 **Connecting Fractions to Area Calculation**
+### 🧠 **Cognitive Cloud Connection: Fractions to Area Calculation**
 
-Now you understand that your BIC Wite-Out **strip** is **3/16 inch wide**!
+Now your mind has built the cognitive pathway: your BIC Wite-Out **strip** is **3/16 inch wide**!
 
-Each strip has TWO measurements:
-- **Length of the strip**: 6.5 inches (how long it is)
-- **Width of the strip**: 3/16 inch (how wide it is)
+**Cognitive Cloud identifies TWO key measurements for each strip:**
+- **Length of the strip**: 6.5 inches (spatial dimension)
+- **Width of the strip**: 3/16 inch (fractional dimension)
 
-When we calculate the surface area of your pencil, we'll use:
-- **Length**: How long your pencil is (you'll measure this)
-- **Strip width**: 3/16 inch (0.1875 inches) - how wide each strip is
-- **Number of strips**: How many strips go around the pencil
+**When Cognitive Cloud calculates your pencil's surface area, the adaptive algorithm uses:**
+- **Length**: How long your pencil measures (you'll discover this)
+- **Strip width**: 3/16 inch (0.1875 inches) - the width dimension of each strip
+- **Number of strips**: How many strips wrap around the pencil (spatial reasoning)
 
+**🧠 Cognitive Cloud Formula Adaptation:**
 **Area = Pencil length × Strip width × Number of strips around**
 **Area = Pencil length × 0.1875 × Number of strips around**
 """)
 
-# Step 1: Estimation
+# Enhanced Step 1: Estimation with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### 📏 Step 1: Make Your Estimate")
-st.markdown("Look at your pencil. How many strips of white correction tape do you think it will take to cover the entire length?")
+st.markdown("### 📏 Discovery Step 1: Cognitive Estimation")
+st.markdown("**Cognitive Cloud Adaptive Challenge:** Look at your pencil. Use your spatial reasoning and estimation skills - how many strips of white correction tape do you think it will take to cover the entire length?")
 
 estimation = st.slider(
-    "My Estimate (number of strips):", 
+    "My Cognitive Estimate (number of strips):", 
     min_value=1, 
     max_value=10, 
     value=4,
-    help="Move the slider to make your best guess!"
+    help="Cognitive Cloud tracks your estimation patterns to adapt future challenges!"
 )
 
-# Visual representation of estimate
-fig1, ax1 = plt.subplots(figsize=(6, 3))
+# Enhanced visual representation with Cognitive Cloud styling
+fig1, ax1 = plt.subplots(figsize=(8, 4))
 for i in range(10):
-    color = "gold" if i < estimation else "lightgray"
-    ax1.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
-    ax1.text(i + 0.4, 0.5, str(i + 1), ha='center', va='center', fontweight='bold')
+    color = "#4A9B8E" if i < estimation else "#F8F9FA"
+    edge_color = "#2E4A6B" if i < estimation else "#cccccc"
+    ax1.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor=edge_color, linewidth=2))
+    text_color = "white" if i < estimation else "#666666"
+    ax1.text(i + 0.4, 0.5, str(i + 1), ha='center', va='center', fontweight='bold', 
+            color=text_color, fontsize=12)
 
 ax1.set_xlim(0, 10)
 ax1.set_ylim(0, 1)
-ax1.set_title(f"Your Estimate: {estimation} strips")
+ax1.set_title(f"🧠 Your Cognitive Estimate: {estimation} strips", fontsize=16, fontweight='bold', color='#2E4A6B')
 ax1.axis('off')
 st.pyplot(fig1)
 
 st.session_state.responses["Estimate"] = estimation
 
-# Analytical Thinking about Estimates
-st.markdown("### 🧠 Analytical Thinking: Reasoning About Estimates")
-st.markdown("Think about your estimation process:")
+# Enhanced Analytical Thinking with Cognitive Cloud approach
+st.markdown("### 🧠 Cognitive Cloud: Advanced Estimation Analysis")
+st.markdown("**Cognitive Cloud adapts to your reasoning patterns. Analyze your estimation process:**")
 st.markdown("""
-- Why is **zero** not a valid option?
-- Is **10** a good maximum estimate? Why or why not?
-- Why might it be unhelpful to allow higher numbers?
-- What would your maximum estimate be?
-- How did you decide that number?
+**Cognitive Questions for Deep Thinking:**
+- Why is **zero** not cognitively valid for this challenge?
+- Is **10** a reasonable maximum estimate? What's your reasoning?
+- How would allowing higher numbers affect your cognitive approach?
+- What would be your personal maximum estimate and why?
+- What cognitive strategies did you use to arrive at your number?
 """)
 
 estimation_reasoning = st.text_area(
-    "Write your thoughts:",
-    height=120,
+    "Share your cognitive process:",
+    height=130,
     key="estimation_reasoning",
-    placeholder="Think about: What makes a good estimate? Why do we set limits?"
+    placeholder="Cognitive Cloud learning: What mental strategies did you use? How did you visualize the problem? What patterns influenced your thinking?"
 )
 
 st.session_state.responses["Estimation_Reasoning"] = estimation_reasoning
 
-# Step 2: Actual Measurement
+# Enhanced Step 2: Actual Measurement
 st.markdown("---")
-st.markdown("### 📐 Step 2: Measure with Real Tape")
-st.markdown("Now use white correction tape to actually measure your pencil. Count how many strips it takes!")
+st.markdown("### 📐 Discovery Step 2: Hands-On Measurement")
+st.markdown("**Cognitive Cloud Real-World Application:** Now use white correction tape to actually measure your pencil. Cognitive Cloud tracks how your estimation compares to reality!")
 
 actual_strips = st.number_input(
     "Actual number of strips used:", 
     min_value=1, 
     max_value=10, 
     value=1,
-    help="Count each strip of tape you used"
+    help="Cognitive Cloud analyzes this data to improve future estimation challenges"
 )
 
-# Visual comparison
-fig2, (ax2, ax3) = plt.subplots(1, 2, figsize=(10, 3))
+# Enhanced visual comparison with Cognitive Cloud styling
+fig2, (ax2, ax3) = plt.subplots(1, 2, figsize=(12, 4))
 
-# Estimate visualization
+# Enhanced estimate visualization
 for i in range(10):
-    color = "gold" if i < estimation else "lightgray"
-    ax2.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
+    color = "#4A9B8E" if i < estimation else "#F8F9FA"
+    edge_color = "#2E4A6B" if i < estimation else "#cccccc"
+    ax2.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor=edge_color, linewidth=2))
+    text_color = "white" if i < estimation else "#666666"
+    ax2.text(i + 0.4, 0.5, str(i + 1), ha='center', va='center', fontweight='bold', 
+            color=text_color, fontsize=10)
 ax2.set_xlim(0, 10)
 ax2.set_ylim(0, 1)
-ax2.set_title(f"Estimate: {estimation} strips")
+ax2.set_title(f"🧠 Cognitive Estimate: {estimation} strips", fontsize=14, fontweight='bold', color='#2E4A6B')
 ax2.axis('off')
 
-# Actual visualization
+# Enhanced actual visualization
 for i in range(10):
-    color = "orange" if i < actual_strips else "lightgray"
-    ax3.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor='black'))
+    color = "#F4A261" if i < actual_strips else "#F8F9FA"
+    edge_color = "#2E4A6B" if i < actual_strips else "#cccccc"
+    ax3.add_patch(plt.Rectangle((i, 0), 0.8, 1, color=color, edgecolor=edge_color, linewidth=2))
+    text_color = "white" if i < actual_strips else "#666666"
+    ax3.text(i + 0.4, 0.5, str(i + 1), ha='center', va='center', fontweight='bold', 
+            color=text_color, fontsize=10)
 ax3.set_xlim(0, 10)
 ax3.set_ylim(0, 1)
-ax3.set_title(f"Actual: {actual_strips} strips")
+ax3.set_title(f"📏 Measured Reality: {actual_strips} strips", fontsize=14, fontweight='bold', color='#2E4A6B')
 ax3.axis('off')
 
 st.pyplot(fig2)
 
 st.session_state.responses["Actual_Strips"] = actual_strips
 
-# Comparison Analysis
+# Enhanced Comparison Analysis with Cognitive Cloud approach
 difference = abs(estimation - actual_strips)
-st.markdown("### 🤔 How Did You Do?")
+st.markdown("### 🧠 Cognitive Cloud Analysis: How Did Your Mind Perform?")
 if estimation == actual_strips:
-    st.success("🎯 Perfect! Your estimate matched exactly!")
+    st.success("🎯 **Cognitive Perfection!** Your estimation matched exactly! Your spatial reasoning is excellently calibrated!")
 else:
-    st.info(f"Your estimate was off by {difference} strip(s). That's still great estimation practice!")
+    st.info(f"🧠 **Cognitive Learning Opportunity:** Your estimate differed by {difference} strip(s). This builds better estimation neural pathways!")
 
-# Error Ratio Tutorial - Auto Calculator
-st.markdown("### 💡 Estimation Tutorial: Understanding Your Estimation Error")
-st.markdown("Now let's analyze your **estimation** compared to the actual number:")
+# Enhanced Error Ratio Tutorial with Cognitive Cloud approach
+st.markdown("### 💡 Cognitive Cloud Advanced Analysis: Understanding Your Estimation Accuracy")
+st.markdown("**Cognitive Cloud Algorithm: Analyzing your estimation vs. actual measurement patterns**")
 
 st.markdown("""
-**Step 1:** Find the **difference** between your **estimation** and the actual value.
+**Cognitive Learning Steps:**
 
-**Step 2:** Divide that difference by the actual number of strips to get your **estimation error ratio**.
+**Step 1:** Calculate the **difference** between your **cognitive estimate** and the measured reality.
 
-**Step 3:** Use this formula: 
+**Step 2:** Apply the Cognitive Cloud algorithm: divide that difference by the actual number to get your **estimation accuracy ratio**.
 
-`Estimation Error Ratio = |Estimation - Actual| / Actual`
+**Step 3:** Cognitive Cloud Formula: 
 
-This helps us understand how close your **estimation** was. Smaller ratios mean better **estimation** accuracy!
+`Estimation Accuracy Ratio = |Cognitive Estimate - Measured Reality| / Measured Reality`
+
+This cognitive metric helps Cognitive Cloud understand how your spatial reasoning compares to physical reality. Lower ratios indicate stronger estimation cognitive pathways!
 """)
 
 if actual_strips > 0:
-    # Auto-calculate based on their responses
+    # Enhanced auto-calculation with Cognitive Cloud styling
     error_ratio = round(difference / actual_strips, 2)
     percent_error = round((difference / actual_strips) * 100, 1)
     percent_accuracy = round(100 - percent_error, 1)
     over_under = "above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exact")
     
-    # Create auto-output calculator display
-    st.markdown("#### 🧮 **Your Estimation Error Calculator Results**")
+    # Enhanced auto-output calculator display
+    st.markdown("#### 🧮 **Cognitive Cloud Analysis Results**")
     
-    # Step-by-step calculation display
+    # Enhanced step-by-step calculation display
     col1, col2 = st.columns([2, 1])
     
     with col1:
         st.markdown(f"""
-        **Step 1 - Find the difference:**
-        - Your **estimation**: **{estimation}** strips
-        - Actual count: **{actual_strips}** strips  
+        **Cognitive Step 1 - Calculate the difference:**
+        - Your **cognitive estimate**: **{estimation}** strips
+        - Measured reality: **{actual_strips}** strips  
         - Difference: |{estimation} - {actual_strips}| = **{difference}** strips
         
-        **Step 2 - Calculate estimation error ratio:**
-        - **Estimation Error Ratio** = {difference} ÷ {actual_strips} = **{error_ratio}**
+        **Cognitive Step 2 - Apply Cognitive Cloud algorithm:**
+        - **Estimation Accuracy Ratio** = {difference} ÷ {actual_strips} = **{error_ratio}**
         
-        **Step 3 - Convert to percentages:**
-        - **Estimation Error**: {difference} ÷ {actual_strips} × 100 = **{percent_error}%**
-        - **Estimation Accuracy**: 100 - {percent_error} = **{percent_accuracy}%**
+        **Cognitive Step 3 - Convert to cognitive performance metrics:**
+        - **Estimation Variance**: {difference} ÷ {actual_strips} × 100 = **{percent_error}%**
+        - **Cognitive Accuracy**: 100 - {percent_error} = **{percent_accuracy}%**
         """)
     
     with col2:
-        # Visual summary box
+        # Enhanced visual summary with Cognitive Cloud styling
         st.markdown(f"""
-        <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white; text-align: center;">
-            <h4 style="margin: 0; color: white;">📊 Your Estimation Results</h4>
-            <p style="margin: 0.5rem 0; font-size: 1.2rem;"><strong>Error Ratio: {error_ratio}</strong></p>
-            <p style="margin: 0.5rem 0;"><strong>Accuracy: {percent_accuracy}%</strong></p>
-            <p style="margin: 0.5rem 0;"><strong>You estimated {over_under}</strong></p>
+        <div style="padding: 1.5rem; background: linear-gradient(135deg, #2E4A6B 0%, #4A9B8E 100%); border-radius: 15px; color: white; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <h4 style="margin: 0; color: white;">🧠 Cognitive Performance</h4>
+            <p style="margin: 0.7rem 0; font-size: 1.3rem;"><strong>Accuracy Ratio: {error_ratio}</strong></p>
+            <p style="margin: 0.7rem 0; font-size: 1.1rem;"><strong>Cognitive Accuracy: {percent_accuracy}%</strong></p>
+            <p style="margin: 0.7rem 0;"><strong>You estimated {over_under}</strong></p>
         </div>
         """, unsafe_allow_html=True)
     
-    # Interpretation with feedback
-    st.markdown("#### 🎯 **What This Means for Your Estimation Skills:**")
+    # Enhanced interpretation with Cognitive Cloud feedback
+    st.markdown("#### 🎯 **Cognitive Cloud Learning Insights:**")
     
     if over_under != "exact":
-        st.markdown(f"Your **estimation** was **{over_under}** the actual amount by **{difference}** strips.")
+        st.markdown(f"Your **cognitive estimation** was **{over_under}** the measured reality by **{difference}** strips.")
     else:
-        st.markdown("🌟 Your **estimation** was exact! Perfect **estimation** precision!")
+        st.markdown("🌟 Your **cognitive estimation** perfectly matched reality! Exceptional spatial reasoning!")
     
-    # Performance feedback
+    # Enhanced performance feedback with Cognitive Cloud approach
     if error_ratio == 0:
-        st.success("🌟 **Perfect estimation!** Your estimation error ratio = 0 - You nailed it!")
+        st.success("🌟 **Cognitive Mastery!** Your estimation accuracy ratio = 0 - Perfect cognitive calibration!")
     elif error_ratio <= 0.2:
-        st.success(f"🎯 **Excellent estimation skills!** Your estimation error ratio = {error_ratio} (≤ 0.2 is great!)")
+        st.success(f"🎯 **Advanced Cognitive Skills!** Your estimation accuracy ratio = {error_ratio} (≤ 0.2 indicates excellent spatial reasoning!)")
     elif error_ratio <= 0.5:
-        st.info(f"👍 **Good estimation skills!** Your estimation error ratio = {error_ratio} (≤ 0.5 is solid work!)")
+        st.info(f"👍 **Developing Cognitive Skills!** Your estimation accuracy ratio = {error_ratio} (≤ 0.5 shows good cognitive progress!)")
     elif error_ratio <= 1.0:
-        st.warning(f"📈 **Keep practicing your estimation!** Your estimation error ratio = {error_ratio} - Estimation gets better with practice!")
+        st.warning(f"📈 **Cognitive Growth Opportunity!** Your estimation accuracy ratio = {error_ratio} - Cognitive Cloud will adapt to strengthen your estimation pathways!")
     else:
-        st.warning(f"🎯 **Estimation challenge!** Your estimation error ratio = {error_ratio} - This was a tough one to estimate!")
+        st.warning(f"🎯 **Cognitive Challenge Identified!** Your estimation accuracy ratio = {error_ratio} - Cognitive Cloud will provide additional adaptive support!")
     
-    # Store all the calculated values
+    # Store enhanced calculated values
     st.session_state.responses.update({
-        "Estimation_Error_Ratio": error_ratio,
-        "Estimation_Percent_Error": percent_error,
-        "Estimation_Percent_Accuracy": percent_accuracy,
-        "Estimation_Over_Under": over_under,
-        "Estimation_Difference": difference
+        "Cognitive_Accuracy_Ratio": error_ratio,
+        "Cognitive_Percent_Error": percent_error,
+        "Cognitive_Percent_Accuracy": percent_accuracy,
+        "Cognitive_Pattern": over_under,
+        "Cognitive_Difference": difference
     })
     
-    # Optional: Show the calculation breakdown
-    with st.expander("🔍 See the detailed estimation calculation breakdown"):
+    # Enhanced calculation breakdown with Cognitive Cloud approach
+    with st.expander("🔍 Cognitive Cloud: Deep Analysis Breakdown"):
         st.markdown(f"""
-        **Mathematical Breakdown of Your Estimation:**
+        **Cognitive Cloud Mathematical Analysis:**
         
         1. **Absolute Difference**: |{estimation} - {actual_strips}| = {difference}
-        2. **Estimation Error Ratio**: {difference} ÷ {actual_strips} = {difference/actual_strips:.4f} ≈ {error_ratio}
-        3. **Estimation Percent Error**: ({difference} ÷ {actual_strips}) × 100 = {(difference/actual_strips)*100:.1f}%
-        4. **Estimation Percent Accuracy**: 100% - {percent_error}% = {percent_accuracy}%
-        5. **Estimation Direction**: {estimation} {">" if estimation > actual_strips else ("<" if estimation < actual_strips else "=")} {actual_strips}, so you estimated {"above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exactly")}
+        2. **Estimation Accuracy Ratio**: {difference} ÷ {actual_strips} = {difference/actual_strips:.4f} ≈ {error_ratio}
+        3. **Cognitive Variance Percentage**: ({difference} ÷ {actual_strips}) × 100 = {(difference/actual_strips)*100:.1f}%
+        4. **Cognitive Accuracy Percentage**: 100% - {percent_error}% = {percent_accuracy}%
+        5. **Cognitive Pattern Analysis**: {estimation} {">" if estimation > actual_strips else ("<" if estimation < actual_strips else "=")} {actual_strips}, indicating your mind estimated {"above" if estimation > actual_strips else ("below" if estimation < actual_strips else "exactly at")} reality
+        
+        **Cognitive Cloud Insight:** Your brain's spatial reasoning patterns show {percent_accuracy}% alignment with physical measurement, providing valuable data for adaptive learning optimization.
         """)
 
 else:
-    st.info("Complete Step 2 above to see your estimation error calculation!")
+    st.info("Complete Discovery Step 2 above to activate Cognitive Cloud analysis!")
 
-# Step 3: Ruler Measurements
+# Enhanced Step 3: Ruler Measurements with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### 📏 Step 3: Measure with a Ruler")
-st.markdown("Use a real ruler to measure your pencil in both inches and centimeters.")
+st.markdown("### 📏 Discovery Step 3: Multi-Unit Measurement Analysis")
+st.markdown("**Cognitive Cloud Adaptive Learning:** Use a real ruler to measure your pencil in both measurement systems. This builds cognitive flexibility with different unit systems.")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -489,59 +520,63 @@ st.session_state.responses.update({"Inches": inches, "Centimeters": centimeters}
 
 if inches > 0 and centimeters > 0:
     ratio = centimeters / inches
-    st.info(f"📊 Conversion: 1 inch ≈ {ratio:.1f} centimeters")
+    st.info(f"🧠 **Cognitive Cloud Pattern Recognition:** 1 inch ≈ {ratio:.1f} centimeters")
 
-# Step 4: Cross Section Exploration
+# Enhanced Step 4: Cross Section Exploration with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### ⭕ Step 4: Explore the Pencil's Cross Section")
-st.markdown("If you cut your pencil like a slice of bread, you'd see a circle. How many tape pieces would it take to go around?")
+st.markdown("### ⭕ Discovery Step 4: Spatial Reasoning - Cross Section Analysis")
+st.markdown("**Cognitive Cloud 3D Thinking:** If you made a cross-sectional cut through your pencil (like slicing bread), you'd see a circle. How many tape pieces would fit around this circular edge?")
 
 circumference_estimate = st.slider(
-    "Estimate: white tape pieces around the circumference:",
+    "Cognitive estimate: white tape pieces around the circumference:",
     min_value=1,
     max_value=8,
     value=6
 )
 
-# Draw cross section
-fig3, ax4 = plt.subplots(figsize=(6, 6))
-circle = plt.Circle((0, 0), 1, color='#DEB887', alpha=0.7)
+# Enhanced cross section visualization with Cognitive Cloud styling
+fig3, ax4 = plt.subplots(figsize=(8, 8))
+circle = plt.Circle((0, 0), 1, color='#DEB887', alpha=0.8, edgecolor='#2E4A6B', linewidth=3)
 ax4.add_patch(circle)
 
-# Add segments around the circle
+# Enhanced segments with Cognitive Cloud colors
 degrees_per_section = 360 / circumference_estimate
+colors = ['#4A9B8E', '#F4A261', '#2E4A6B']
 for i in range(circumference_estimate):
     theta1 = i * degrees_per_section
     theta2 = (i + 1) * degrees_per_section
     
     wedge = mpatches.Wedge(
-        (0, 0), 1.2, theta1, theta2, 
-        width=0.15, facecolor="white", 
-        edgecolor='black', alpha=0.8
+        (0, 0), 1.3, theta1, theta2, 
+        width=0.2, facecolor=colors[i % len(colors)], 
+        edgecolor='white', alpha=0.9, linewidth=2
     )
     ax4.add_patch(wedge)
 
-ax4.set_xlim(-1.5, 1.5)
-ax4.set_ylim(-1.5, 1.5)
+ax4.set_xlim(-1.8, 1.8)
+ax4.set_ylim(-1.8, 1.8)
 ax4.set_aspect('equal')
-ax4.set_title(f"Pencil Cross Section - {circumference_estimate} white tape pieces around edge")
+ax4.set_title(f"🧠 Cognitive Cloud Cross Section Analysis\n{circumference_estimate} tape pieces around pencil edge", 
+             fontsize=16, fontweight='bold', color='#2E4A6B', pad=20)
 ax4.axis('off')
 st.pyplot(fig3)
 
 st.session_state.responses["Circumference_Estimate"] = circumference_estimate
 
-# Step 5: Area Calculator
+# Enhanced Step 5: Area Calculator with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### 📦 Step 5: Understanding Area")
+st.markdown("### 📦 Discovery Step 5: Cognitive Area Synthesis")
 st.markdown("""
-If you could unwrap all the correction tape from your pencil and lay it flat, you'd get a rectangle!
-- **Length** = length of your pencil
-- **Width** = width of one tape strip
-- **Number of strips** = how many strips went around (from cross section)
+**Cognitive Cloud Advanced Thinking:** If you could unwrap all the correction tape from your pencil and lay it flat, you'd create a rectangle!
+
+**Cognitive Cloud Dimensional Analysis:**
+- **Length** = length of your pencil (linear dimension)
+- **Width** = width of one tape strip (fractional dimension)
+- **Depth** = number of strips around circumference (circular dimension)
 - **Total Area** = Length × Width × Number of strips around
 """)
 
-st.markdown("#### 🧮 Area Calculator")
+st.markdown("#### 🧮 Cognitive Cloud Area Calculator")
 col1, col2, col3 = st.columns(3)
 with col1:
     calc_length = st.number_input(
@@ -556,11 +591,11 @@ with col2:
     calc_width = st.number_input(
         "Correction tape width (inches):", 
         min_value=0.0, 
-        step=0.1, 
-        value=0.2,
-        format="%.1f",
+        step=0.01, 
+        value=0.1875,  # 3/16 in decimal
+        format="%.4f",
         key="calc_width",
-        help="White-out correction tape is typically about 0.2 inches wide"
+        help="BIC Wite-Out correction tape is 3/16 inch = 0.1875 inches wide"
     )
 with col3:
     calc_strips = st.number_input(
@@ -574,12 +609,19 @@ with col3:
 if calc_length > 0 and calc_width > 0 and calc_strips > 0:
     total_area = calc_length * calc_width * calc_strips
     
-    st.markdown("#### 📊 Your Calculation:")
+    st.markdown("#### 📊 Cognitive Cloud Calculation Analysis:")
     st.markdown(f"""
-    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.2f} square inches**
+    **{calc_length}** inches (length) × **{calc_width}** inches (width) × **{calc_strips}** strips = **{total_area:.4f} square inches**
     """)
     
-    st.success(f"🎯 Total Surface Area: **{total_area:.2f} square inches**")
+    # Enhanced success message with Cognitive Cloud styling
+    st.markdown(f"""
+    <div style="padding: 1.5rem; background: linear-gradient(135deg, #4A9B8E 0%, #F4A261 100%); border-radius: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <h3 style="color: white; margin: 0;">🎯 Cognitive Cloud Surface Area Discovery</h3>
+        <h2 style="color: white; margin: 1rem 0; font-size: 2rem;">{total_area:.4f} square inches</h2>
+        <p style="color: #f0f0f0; margin: 0;">Your pencil's total surface area coverage</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.session_state.responses.update({
         "Calculated_Area": total_area,
@@ -588,126 +630,140 @@ if calc_length > 0 and calc_width > 0 and calc_strips > 0:
         "Calc_Strips": calc_strips
     })
 else:
-    st.info("Enter all measurements above to calculate the area!")
+    st.info("🧠 Cognitive Cloud waiting: Enter all measurements above to activate area calculation!")
 
-# Word Problems
+# Enhanced Word Problems with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### 📝 Challenge Word Problems")
+st.markdown("### 📝 Cognitive Cloud Challenge Problems")
 
-st.markdown("#### 📚 **Problem 1: Classroom Pencils**")
+st.markdown("#### 📚 **Challenge 1: Collaborative Learning Scenario**")
 st.markdown("""
-**Ms. Garcia** has 4 new pencils for her reading group. Each pencil is 8 inches long. 
-She uses correction tape that is 0.2 inches wide, and it takes 6 strips of tape to go around each pencil.
+**Ms. Garcia** leads a Cognitive Cloud learning group with 4 new pencils. Each pencil measures 8 inches long. 
+She uses adaptive correction tape that is 0.1875 inches wide (3/16 inch), and the Cognitive Cloud analysis shows it takes 6 strips of tape to circumnavigate each pencil.
 
-**Question:** How much correction tape area is needed to cover all 4 pencils?
+**Cognitive Challenge:** Calculate the total correction tape area needed to cover all 4 pencils using Cognitive Cloud methodology.
 """)
 
 problem1_answer = st.text_area(
-    "Show your work:",
-    height=100,
+    "Show your cognitive process:",
+    height=120,
     key="problem1",
-    placeholder="Step 1: Find the area for 1 pencil\nStep 2: Multiply by 4 pencils\nStep 3: Write your answer"
+    placeholder="Cognitive Step 1: Calculate area for 1 pencil using the formula\nCognitive Step 2: Apply multiplication for 4 pencils\nCognitive Step 3: State your discovery with units"
 )
 
-st.markdown("#### 🎨 **Problem 2: Art Supply**")
+st.markdown("#### 🎨 **Challenge 2: Creative Application**")
 st.markdown("""
-**Tommy** is decorating a pencil for an art project. His pencil is 7 inches long, and he uses tape that is 0.5 inches wide. 
-He estimates it will take 5 strips to go around his pencil.
+**Tommy** uses Cognitive Cloud thinking for an art project. His pencil measures 7 inches long, and he selects tape that is 0.5 inches wide. 
+His spatial reasoning estimates suggest 5 strips will circumnavigate his pencil.
 
-**Question:** What is the surface area Tommy will cover with tape?
+**Cognitive Challenge:** What surface area will Tommy cover using Cognitive Cloud calculation methods?
 """)
 
 problem2_answer = st.text_area(
-    "Show your calculation:",
-    height=100,
+    "Apply the Cognitive Cloud formula:",
+    height=120,
     key="problem2",
-    placeholder="Use the formula: Length × Width × Number of strips = ?"
+    placeholder="Use Cognitive Cloud methodology: Length × Width × Number of strips = ?"
 )
 
-st.markdown("#### 🏫 **Problem 3: Pencil Comparison**")
+st.markdown("#### 🏫 **Challenge 3: Comparative Analysis**")
 st.markdown("""
-**Sarah** has a short pencil that is 5 inches long. **Alex** has a long pencil that is 10 inches long. 
-Both pencils need 6 strips of 0.2-inch wide tape to be covered.
+**Sarah** has a shortened pencil measuring 5 inches long. **Alex** has a full-length pencil measuring 10 inches long. 
+Both pencils require 6 strips of 0.1875-inch wide tape for complete coverage according to Cognitive Cloud analysis.
 
-**Question:** How much more tape area does Alex need than Sarah?
+**Cognitive Challenge:** Using Cognitive Cloud comparative thinking, determine how much additional tape area Alex needs compared to Sarah.
 """)
 
 problem3_answer = st.text_area(
-    "Find the difference:",
-    height=100,
+    "Cognitive Cloud comparative analysis:",
+    height=120,
     key="problem3",
-    placeholder="Sarah's pencil area = ?\nAlex's pencil area = ?\nDifference = ?"
+    placeholder="Sarah's pencil area calculation = ?\nAlex's pencil area calculation = ?\nCognitive Cloud difference = ?"
 )
 
 st.session_state.responses.update({
-    "Word_Problem_1": problem1_answer,
-    "Word_Problem_2": problem2_answer,
-    "Word_Problem_3": problem3_answer
+    "Cognitive_Challenge_1": problem1_answer,
+    "Cognitive_Challenge_2": problem2_answer,
+    "Cognitive_Challenge_3": problem3_answer
 })
 
-with st.expander("💡 Need help? Click for hints"):
+# Enhanced hints with Cognitive Cloud approach
+with st.expander("💡 Cognitive Cloud Learning Support - Click for adaptive hints"):
     hint_col1, hint_col2, hint_col3 = st.columns(3)
     with hint_col1:
-        st.markdown("**Problem 1:**\n8 × 0.2 × 6 = ? \nThen × 4 pencils")
+        st.markdown("**Challenge 1 Pathway:**\n8 × 0.1875 × 6 = ? \nThen multiply by 4 pencils")
     with hint_col2:
-        st.markdown("**Problem 2:**\n7 × 0.5 × 5 = ?")
+        st.markdown("**Challenge 2 Pathway:**\n7 × 0.5 × 5 = ?")
     with hint_col3:
-        st.markdown("**Problem 3:**\nFind each area first, then subtract!")
+        st.markdown("**Challenge 3 Pathway:**\nCalculate each area first, then find the difference!")
 
-# Reflection Questions
+# Enhanced Reflection Questions with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### 💭 Reflection Questions")
+st.markdown("### 💭 Cognitive Cloud Reflection & Metacognition")
 
-reflection1 = st.text_area("1. What surprised you most about measuring your pencil?")
-reflection2 = st.text_area("2. Why might estimation be a useful skill in real life?")
-reflection3 = st.text_area("3. Which measurement (inches or centimeters) felt more natural to you? Why?")
+reflection1 = st.text_area("1. What cognitive discovery surprised you most about measuring your pencil?", 
+                          placeholder="Cognitive Cloud learns from your insights...")
+reflection2 = st.text_area("2. How might estimation be a valuable cognitive skill in real-world applications?", 
+                          placeholder="Think about daily situations where estimation helps...")
+reflection3 = st.text_area("3. Which measurement system (inches or centimeters) felt more cognitively natural? Why?", 
+                          placeholder="Cognitive Cloud analyzes learning preferences...")
+reflection4 = st.text_area("4. How did your spatial reasoning change throughout this Cognitive Cloud experience?", 
+                          placeholder="Reflect on your cognitive growth...")
 
 st.session_state.responses.update({
-    "Reflection_1": reflection1,
-    "Reflection_2": reflection2,
-    "Reflection_3": reflection3
+    "Cognitive_Reflection_1": reflection1,
+    "Cognitive_Reflection_2": reflection2,
+    "Cognitive_Reflection_3": reflection3,
+    "Cognitive_Reflection_4": reflection4
 })
 
-# Submit Section
+# Enhanced Submit Section with Cognitive Cloud approach
 st.markdown("---")
-st.markdown("### ✅ Submit Your Complete Work")
-if st.button("✅ Submit My Work", type="primary"):
+st.markdown("### ✅ Cognitive Cloud Learning Portfolio Submission")
+if st.button("✅ Submit My Cognitive Cloud Portfolio", type="primary"):
     if name and date:
         st.session_state.all_responses.append(st.session_state.responses.copy())
-        st.success("Great work! Your responses have been saved.")
+        st.success("🧠 Excellent cognitive work! Your learning portfolio has been saved to Cognitive Cloud.")
         
-        st.markdown("### 📊 Your Summary")
+        st.markdown("### 📊 Your Cognitive Cloud Learning Summary")
         summary_col1, summary_col2, summary_col3 = st.columns(3)
         with summary_col1:
-            st.metric("Estimate", f"{estimation} strips")
+            st.metric("Cognitive Estimate", f"{estimation} strips", delta=None)
         with summary_col2:
-            st.metric("Actual", f"{actual_strips} strips")
+            st.metric("Measured Reality", f"{actual_strips} strips", delta=None)
         with summary_col3:
-            st.metric("Difference", f"{difference} strips")
+            difference_label = "Perfect!" if difference == 0 else f"{difference} strips"
+            st.metric("Cognitive Accuracy", difference_label, delta=None)
     else:
-        st.error("Please fill in your name and date before submitting!")
+        st.error("Please complete your learner profile (name and date) before submitting to Cognitive Cloud!")
 
-# Teacher's Data View
-if st.checkbox("🏫 Teacher View: Show All Student Data"):
+# Enhanced Teacher's Data View with Cognitive Cloud approach
+if st.checkbox("🏫 Educator Dashboard: Cognitive Cloud Analytics"):
     if st.session_state.all_responses:
         df = pd.DataFrame(st.session_state.all_responses)
         st.dataframe(df, use_container_width=True)
         
         if len(df) > 0:
-            st.markdown("### 📈 Class Statistics")
+            st.markdown("### 📈 Cognitive Cloud Class Analytics")
             col1, col2, col3 = st.columns(3)
             with col1:
                 avg_estimate = df['Estimate'].mean() if 'Estimate' in df.columns else 0
-                st.metric("Average Estimate", f"{avg_estimate:.1f}")
+                st.metric("Average Cognitive Estimate", f"{avg_estimate:.1f}")
             with col2:
                 avg_actual = df['Actual_Strips'].mean() if 'Actual_Strips' in df.columns else 0
-                st.metric("Average Actual", f"{avg_actual:.1f}")
+                st.metric("Average Measured Reality", f"{avg_actual:.1f}")
             with col3:
                 completion_rate = (df['Name'].notna().sum() / len(df)) * 100
-                st.metric("Completion Rate", f"{completion_rate:.0f}%")
+                st.metric("Cognitive Cloud Engagement", f"{completion_rate:.0f}%")
     else:
-        st.info("No student responses yet.")
+        st.info("🧠 Cognitive Cloud awaiting learner data...")
 
-# Footer
+# Enhanced Footer with Cognitive Cloud branding
 st.markdown("---")
-st.markdown("*Happy learning! Remember: estimation is a superpower that gets better with practice! 🌟*")
+st.markdown("""
+<div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #2E4A6B 0%, #4A9B8E 100%); border-radius: 15px; margin-top: 2rem;">
+    <p style="color: white; margin: 0; font-size: 1.1rem; font-weight: bold;">🧠 Cognitive Cloud: Think Beyond. Learn Without Limits.</p>
+    <p style="color: #f0f0f0; margin: 0.5rem 0; font-style: italic;">Remember: Your cognitive abilities grow stronger with every adaptive challenge! 🌟</p>
+    <p style="color: #e0e0e0; margin: 0; font-size: 0.9rem;">Powered by adaptive learning technology that evolves with your mind</p>
+</div>
+""", unsafe_allow_html=True)
